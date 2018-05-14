@@ -41,17 +41,17 @@ cc.Class({
         this.player = this.node.getParent().getComponent("Player");
 
         var Unit = require("Unit");
-        var enemy = new Unit();
+        this.enemy = new Unit();
 
-        this.InitBattle(enemy);
+        this.InitBattle(this.enemy);
 
         this.BattleLog = this.node.getChildByName("battleLog").getComponent("BattleLog");
     },
     
-    InitBattle:function (enemy) {
+    InitBattle:function () {
         this.UpdateActionState();
         this.UpdateActionLabel();
-        this.UpdateEnemyState(enemy);
+        this.UpdateEnemyState();
         this.UpdateDistance();
     },
 
@@ -74,10 +74,10 @@ cc.Class({
         this.escapeRate.string = "0";
     },
 
-    UpdateEnemyState:function (enemy) {
-        this.enemyName.string = enemy.Name;
+    UpdateEnemyState:function () {
+        this.enemyName.string = this.enemy.Name;
         this.enemyHpProgress.progress = 1.0;
-        this.enemyHpLabel.string = enemy.hp + "/" + enemy.hpMax;
+        this.enemyHpLabel.string = this.enemy.hp + "/" + this.enemy.hpMax;
 
     },
 
@@ -113,7 +113,12 @@ cc.Class({
     },
 
     EscapeBattle:function () {
-        var r = Math.floor(Math.random() * 10000);
+        var rnd = Math.floor(Math.random() * 10000);
+        var rate = this.player.speed/(this.player.speed+this.enemy.speed)*10000;
+        if(rnd<=rate)
+            console.log("Escape!");
+        else
+            console.log("Escape Failed!");
     },
 
 });

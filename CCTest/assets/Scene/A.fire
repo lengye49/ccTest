@@ -45,7 +45,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": null
+    "autoReleaseAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -17228,11 +17228,8 @@
     "_enabled": true,
     "hp": 100,
     "hpMax": 100,
-    "basicAttack": 10,
     "attack": 0,
-    "basicDefence": 0,
     "defence": 0,
-    "basicSpeed": 10,
     "speed": 0,
     "escapeProficiency": 0,
     "meleeProficiency": 0,
@@ -17248,6 +17245,10 @@
     "hourNow": 0,
     "minuteNow": 0,
     "minutesPassed": 0,
+    "weapon1": 0,
+    "weapon2": 0,
+    "armor": 0,
+    "shoes": 0,
     "backpack": null
   },
   {

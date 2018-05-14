@@ -4,105 +4,39 @@ cc.Class({
 
     properties: {
         //战斗属性：
-        hp : {
-            default:100,
-            type: cc.Integer,
-        },
-        hpMax : {
-            default:100,
-            type: cc.Integer,
-        },
-        basicAttack : {
-            default:10,
-            type: cc.Integer,
-        },
-        attack:{
-            default:0,
-            type:cc.Integer,
-        },
-        basicDefence:{
-            default:0,
-            type:cc.Integer,
-        },
-        defence:{
-            default:0,
-            type:cc.Integer,
-        },
-        basicSpeed:{
-            default:10,
-            type:cc.Integer,
-        },
-        speed:{
-            default:5,
-            type:cc.Integer,
-        },
+        hp : 100,
+        hpMax : 100,
+        attack:10,
+        defence:0,
+        speed:0,
+
         //熟练度
-        escapeProficiency:{
-            default:0,
-            type:cc.Integer,
-        },
-        meleeProficiency:{
-            default:0,
-            type:cc.Integer,
-        },
-        rangedProficiency:{
-            default:0,
-            type:cc.Integer,
-        },
+        escapeProficiency:0,
+        meleeProficiency:0,
+        rangedProficiency:0,
         //速度：
-        speed:{
-            default:0,
-            type:cc.Integer,
-        },
+        speed:5.0,
         //精力：影响探索
-        spirit : {
-            default:100,
-            type:cc.Integer,
-        },
-        food:{
-            default:100,
-            type:cc.Integer,
-        },
-        water:{
-          default:100,
-          type:cc.Integer,
-        },
+        spirit : 100,
+        food : 100,
+        water : 100,
         //体质：影响生命上限、精力上限
-        constitution:{
-            default:30,
-            type:cc.Integer,
-        },
+        constitution:30,
         //负重，会影响速度
-        weight:{
-            default:0,
-            type:cc.Integer,
-        },
+        weight:0,
         //金钱
-        money:{
-            default:0,
-            type:cc.Integer,
-        },
+        money:0,
         //时间
-        seasonNow:{
-            default:0,
-            type:cc.Integer,
-        },
-        dayNow:{
-            default: 1,
-            type: cc.Integer,
-        },
-        hourNow:{
-            default:0,
-            type:cc.Integer,
-        },
-        minuteNow:{
-            default:0,
-            type:cc.Integer,
-        },
-        minutesPassed:{
-            default:0,
-            type:cc.Integer,
-        },
+        seasonNow:0,
+        dayNow:1,
+        hourNow:0,
+        minuteNow:0,
+        minutesPassed:0,
+        //
+        weapon1 : 0,
+        weapon2 : 0,
+        armor : 0,
+        shoes : 0,
 
         //背包
         backpack:cc.String,
@@ -124,6 +58,7 @@ cc.Class({
         this.backpack= strs[6].toString();
     },
 
+    //增加时间
     AddMinutes:function (min) {
         this.minutesPassed += min;
         UpdateTime();
@@ -132,14 +67,90 @@ cc.Class({
     UpdateTime:function () {
         var min = this.minutesPassed;
         var monthNow = parseInt(min / 43200);
+
+        var lastSeason = this.seasonNow;
         this.seasonNow = (monthNow % 12) / 3;
+        if(this.seasonNow>lastSeason)
+            console.log("SeasonChanged!");
+
+        var lastDay = this.dayNow;
         this.dayNow = min / 1440;
+        if(this.dayNow>lastDay)
+            console.log("DayChanged!");
+
         min -= this.dayNow * 1440;
+        var lastHour = this.hourNow;
         this.hourNow = min / 60;
+        if(this.hourNow!=lastHour) {
+            console.log("HourChanged!")
+            var hours = (this.hourNow>lastHour)?(this.hourNow-lastHour):(this.hourNow+24-lastHour);
+            this.ConsumeFoodAndWater(hours);
+        }
+
         this.minuteNow = min % 60;
+
         this.HeadView.UpdateView(this);
     },
 
+    //恢复生命
+    Heal:function (value) {
+        var healValue = (value > this.hpMax - this.hp) ? (this.hpMax - this.hp) : (value);
+        this.hp += healValue;
+        this.HeadView.UpdateView(this);
+    },
+
+    //受到伤害
+    Damage:function (value) {
+        var damageValue = value>this.hp?this.hp:value;
+        this.hp-=damageValue;
+        this.HeadView.UpdateView(this);
+
+        //被打死
+        if(this.hp<=0)
+            console.log("被打死！");
+    },
+
+    //吃食物
+    Eat:function (value) {
+        var eatValue = (value > 100 - this.food) ? (100 - this.food) : value;
+        this.food += eatValue;
+        this.HeadView.UpdateView(this);
+    },
+
+    //喝水
+    Drink:function(value){
+        var drinkValue = (value > 100 - this.water) ? (100 - this.water) : value;
+        this.water += drinkValue;
+        this.HeadView.UpdateView(this);
+    },
+
+    //时间消耗食物和水,每小时1点
+    ConsumeFoodAndWater:function (value) {
+        var v = this.food>value?value:this.food;
+        this.food -= v;
+
+        v = this.water>value?value:this.water;
+        this.water-=v;
+
+        this.HeadView.UpdateView(this);
+
+        if(this.food<=0)
+            console.log("饿死！");
+
+        if(this.water<=0)
+            console.log("渴死！");
+    },
+
+    Sleep:function(value){
+        this.ConsumeFoodAndWater(value);
+        this.RecoverSpirit(value);
+        this.HeadView.UpdateView(this);
+    },
+
+    RecoverSpirit:function (value) {
+        var v = (100-this.spirit>value)?value:(100-this.spirit);
+        this.spirit += v;
+    },
 
 
 });

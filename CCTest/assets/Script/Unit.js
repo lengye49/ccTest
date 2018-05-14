@@ -14,6 +14,7 @@ cc.Class({
         Name: "未知生物",
         hp:100,
         hpMax:100,
+        speed:5.0,
     },
 
 
