@@ -12,15 +12,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        tipLabel:cc.Label,
     },
 
-
-
-
-    getReward(){
-
+    showTip:function (str) {
+        this.tipLabel.string = str;
     },
 
-    // update (dt) {},
 });

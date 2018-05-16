@@ -12,22 +12,20 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        tipPrfeb:cc.Prefab,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad:function () {
         console.log("OnLoadMethod");
-        this.Player = this.getComponent('Player');
-        this.Player.SetPlayerData("6;90;100;2;80;17;1001|2,1002|3");
-        console.log("Day = " + this.Player.day);
-        console.log("BackPack = " + this.Player.backpack);
+        window.Player = this.getComponent('Player');
+        window.Player.SetPlayerData("6;90;100;2;80;17;1001|2,1002|3");
     },
 
     start () {
         console.log("OnStartMethod");
-        console.log(this.Player.day);
+        console.log(window.Player.dayNow);
     },
 
 

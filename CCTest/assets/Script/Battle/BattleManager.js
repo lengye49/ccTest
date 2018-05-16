@@ -40,7 +40,7 @@ cc.Class({
     },
 
     start:function () {
-        this.player = this.node.getParent().getComponent("Player");
+        window.Player = this.node.getParent().getComponent("Player");
 
         var Unit = require("Unit");
         this.enemy = new Unit();
@@ -111,8 +111,8 @@ cc.Class({
             this.BattleLog.add("-->"+"但是很幸运，你躲过了。");
         else
         {
-            var dmg = this.CalDamage(this.enemy.attack,this.player.defence,this.CalCrit());
-            this.player.Damage(dmg);
+            var dmg = this.CalDamage(this.enemy.attack,window.Player.defence,this.CalCrit());
+            window.Player.Damage(dmg);
         }
         this.enemyCD+=1;
     },
@@ -145,11 +145,11 @@ cc.Class({
         }
 
         //需要加上武器的攻击
-        var dmg = this.CalDamage(this.player.attack,this.enemy.defence,this.CalCrit());
+        var dmg = this.CalDamage(window.Player.attack,this.enemy.defence,this.CalCrit());
         this.EnemyLoseHp(dmg);
         this.heroCD+=1;
 
-        this.player.meleeProficiency++;
+        window.Player.meleeProficiency++;
     },
 
     Weapon2Attack:function () {
@@ -158,10 +158,10 @@ cc.Class({
             return;
         }
 
-        var dmg = this.CalDamage(this.player.attack,this.enemy.defence,this.CalCrit());
+        var dmg = this.CalDamage(window.Player.attack,this.enemy.defence,this.CalCrit());
         this.EnemyLoseHp(dmg);
         this.heroCD+=1;
-        this.player.rangedProficiency++;
+        window.Player.rangedProficiency++;
     },
 
     Weapon3Attack:function () {
@@ -170,14 +170,14 @@ cc.Class({
             return;
         }
 
-        var dmg = this.CalDamage(this.player.attack,this.enemy.defence,this.CalCrit());
+        var dmg = this.CalDamage(window.Player.attack,this.enemy.defence,this.CalCrit());
         this.EnemyLoseHp(dmg);
         this.heroCD+=1;
     },
 
 
     JumpForward:function () {
-        var d = this.player.speed <= this.distance ? this.player.speed : this.distance;
+        var d = window.Player.speed <= this.distance ? window.Player.speed : this.distance;
         this.BattleLog.add("-->你前进了" + d + "米。");
         this.distance -= d;
         this.UpdateDistance();
@@ -185,7 +185,7 @@ cc.Class({
     },
 
     JumpBackward:function () {
-        var d = this.player.speed;
+        var d = window.Player.speed;
         this.BattleLog.add("-->你后退了"+d+"米。");
         this.distance += d;
         this.UpdateDistance();
@@ -194,7 +194,7 @@ cc.Class({
 
     EscapeBattle:function () {
         var rnd = Math.floor(Math.random() * 10000);
-        var rate = this.player.speed/(this.player.speed+this.enemy.speed)*10000;
+        var rate = window.Player.speed/(window.Player.speed+this.enemy.speed)*10000;
         if(rnd<=rate){
             console.log("打不过就跑，并不丢人。");
             player.escapeProficiency++;
