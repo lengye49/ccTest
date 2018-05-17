@@ -15,7 +15,7 @@ cc.Class({
         meleeProficiency:0,
         rangedProficiency:0,
         //速度：
-        speed:5.0,
+        speed:2.0,
         //精力：影响探索
         spirit : 100,
         food : 100,

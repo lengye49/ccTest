@@ -1,0 +1,24 @@
+﻿{
+    "name": "测试道具",
+    "desc": "这是个普通的测试",
+    "price": 100,
+    "effects": {
+        "hp": 5,
+        "food": 3,
+        "water": 2
+    },
+    "components": [
+        {
+            "name": "子物体1",
+            "count": 2
+        },
+        {
+            "name": "子物体2",
+            "count": 5
+        },
+        {
+            "name": "子物体3",
+            "count": 10
+        }
+    ]
+}
