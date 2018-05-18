@@ -12,7 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        tipPrfeb:cc.Prefab,
+        tipPrefab:cc.Prefab,
     },
 
     // LIFE-CYCLE CALLBACKS:
