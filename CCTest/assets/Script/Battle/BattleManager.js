@@ -36,21 +36,38 @@ cc.Class({
         rate:0.0,
         heroCD:0.0,
         enemyCD:0.0,
-        // battleLog:cc.BattleLog,
+    },
+
+    onLoad:function(){
+        this.BattleLog = this.node.getChildByName("battleLog").getComponent("BattleLog");
+        var Unit = require("Unit");
+        this.enemy = new Unit();
     },
 
     start:function () {
-        window.Player = this.node.getParent().getComponent("Player");
 
-        var Unit = require("Unit");
-        this.enemy = new Unit();
-
-        this.InitBattle(this.enemy);
-
-        this.BattleLog = this.node.getChildByName("battleLog").getComponent("BattleLog");
     },
-    
-    InitBattle:function () {
+
+    startBattle:function(enemyIds,lastPanel,nextPanel){
+        lastPanel.active = false;
+        this.NextPanel = nextPanel;
+        this.node.position = cc.p(0,0);
+        //根据id生成敌人
+        this.enemyIds = enemyIds;
+
+        this.initBattle();
+    },
+
+    leaveBattle:function(){
+        this.node.position = cc.p(-3000,0);
+
+        this.NextPanel.active = true;
+        this.NextPanel.position = cc.p(0,0);
+    },
+
+
+
+    initBattle:function () {
         this.UpdateActionLabel();
         this.UpdateEnemyState();
         this.UpdateDistance();
@@ -87,6 +104,8 @@ cc.Class({
         this.distanceLabel.string = this.distance+"米";
     },
 
+
+
     //判断攻击顺序
     CheckTurn:function(){
         if(this.heroCD<=this.enemyCD)
@@ -94,6 +113,8 @@ cc.Class({
         else
             this.EnemyTurn();
     },
+
+
 
     //敌方行动
     EnemyTurn:function () {
@@ -129,9 +150,11 @@ cc.Class({
         var dmg = value > this.enemy.hp ? this.enemy.hp : value;
         this.enemy.hp -= dmg;
         this.UpdateEnemyState();
-        if (this.enemy.hp <= 0)
-            console.log("战斗结束！");
+
+        this.checkGameOver();
     },
+
+
 
     //玩家行动
     PlayerTurn:function () {
@@ -206,6 +229,7 @@ cc.Class({
     },
 
 
+
     //通用计算
     CalHit:function () {
         return true;
@@ -220,6 +244,20 @@ cc.Class({
         if (isCrit)
             dmg *= 2;
         return dmg;
+    },
+
+
+
+    //检测战斗结束
+    checkGameOver:function () {
+       if(this.enemy.hp>0)
+           return;
+       console.log("你打死了一个敌人");
+       if(this.enemyIds.length>0)
+           console.log("下一个敌人出现了！");
+       else
+           this.leaveBattle();
+
     },
 
 

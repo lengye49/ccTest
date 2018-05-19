@@ -20,8 +20,8 @@ cc.Class({
         this.moneyLabel.string = player.money;
         this.dateLabel.string = player.dayNow;
         this.timeLabel.string = player.hourNow + ":" + player.minuteNow;
-        this.seasonLabel.string = SeasonString(player.seasonNow);
-        this.seasonLabel.color = SeasonColor(player.seasonNow);
+        this.seasonLabel.string = this.SeasonString(player.seasonNow);
+        this.seasonLabel.node.color = this.SeasonColor(player.seasonNow);
     },
 
     SeasonString:function (index) {

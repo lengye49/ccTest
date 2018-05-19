@@ -28,7 +28,7 @@ cc.Class({
         choice3Text:cc.Label,
     },
 
-    showChoice:function (choice) {
+    updataShow:function (choice) {
         this.nameLabel.string = choice.name;
         this.descLabel.string = choice.desc;
 

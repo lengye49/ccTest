@@ -16,21 +16,41 @@ cc.Class({
         searchButton:cc.Button,
     },
 
-    showSearch:function (isShowMove) {
-
+    updateShow:function (isShowMove) {
+        if(isShowMove)
+            this.moveButton.node.active = true;
+        else
+            this.moveButton.node.active = false;
     },
 
     //赶路界面
     moveForward:function () {
+        window.Player.addMinutes(60);
 
-        var dis = window.Player.speed * 3600 /2;
-        this.getReward();
-        console.log("你前进了"+dis+"米,并获得了...");
+        //检测是否遇到怪物
+        if (true) {
+            window.Battle.startBattle(0,this.node,this.node);
+        } else {
+            var dis = window.Player.speed * 3600 / 2;
+            this.getReward();
+            console.log("你前进了" + dis + "米,并获得了...");
+        }
+
     },
 
     searchAround:function () {
-        this.getReward();
-        console.log("你四周寻找了一圈，找到了...");
+        window.Player.addMinutes(60);
+
+        if (true) {
+            window.Battle.startBattle(0, this.node, this.node);
+        } else {
+            this.getReward();
+            console.log("你四周寻找了一圈，找到了{...");
+        }
+    },
+
+    getReward:function () {
+        console.log("获得奖励代码。");
     },
 
 });

@@ -12,7 +12,9 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        tipPrefab:cc.Prefab,
+        tipNode:cc.Node,
+        exploreNode:cc.Node,
+        battleNode:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -21,13 +23,20 @@ cc.Class({
         console.log("OnLoadMethod");
         window.Player = this.getComponent('Player');
         window.Player.SetPlayerData("6;90;100;2;80;17;1001|2,1002|3");
+
+        window.Tip = this.tipNode.getComponent('Tip');
+        window.Battle = this.battleNode.getComponent('BattleManager');
+        // window.Game = this;
+
+        this.explore = this.exploreNode.getComponent('ExploreManager');
     },
 
     start () {
         console.log("OnStartMethod");
-        console.log(window.Player.dayNow);
-    },
 
+        this.explore.showSearch(true);
+        window.Tip.ShowTip("测试TIPS");
+    },
 
 
 });

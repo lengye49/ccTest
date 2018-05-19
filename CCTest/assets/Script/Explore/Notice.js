@@ -15,7 +15,7 @@ cc.Class({
         tipLabel:cc.Label,
     },
 
-    showTip:function (str) {
+    updateShow:function (str) {
         this.tipLabel.string = str;
     },
 

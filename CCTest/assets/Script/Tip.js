@@ -33,7 +33,6 @@ cc.Class({
     },
 
     UpdateShow : function (){
-        console.log("timePassed "+ this.timePassed);
         if(this.timePassed <= 0.5)
             this.node.scale = cc.p(this.timePassed * 2,this.timePassed * 2);
         if(this.timePassed > 3)

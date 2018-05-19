@@ -59,12 +59,12 @@ cc.Class({
     },
 
     //增加时间
-    AddMinutes:function (min) {
+    addMinutes:function (min) {
         this.minutesPassed += min;
-        UpdateTime();
+        this.updateTime();
     },
 
-    UpdateTime:function () {
+    updateTime:function () {
         var min = this.minutesPassed;
         var monthNow = parseInt(min / 43200);
 
@@ -142,6 +142,9 @@ cc.Class({
     },
 
     Sleep:function(value){
+
+        this.addMinutes(value*60);
+
         this.ConsumeFoodAndWater(value);
         this.RecoverSpirit(value);
         this.HeadView.UpdateView(this);

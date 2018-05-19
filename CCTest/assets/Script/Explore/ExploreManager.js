@@ -12,15 +12,52 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        searchNode:cc.Node,
+        choiceNode:cc.Node,
+        normalNoticeNode:cc.Node,
+        screenNoticeNode:cc.Node,
     },
 
+    onLoad:function(){
+        this.searchPanel = this.searchNode.getComponent('Search');
+        this.choicePanel = this.choiceNode.getComponent('Choice');
+        this.normalNoticePanel = this.normalNoticeNode.getComponent('Notice');
+        this.screenNoticePanel = this.screenNoticeNode.getComponent('Notice');
 
-
-
-    getReward(){
-
+        this.hideAll();
     },
+
+    showSearch:function(param){
+        this.hideAll();
+        this.searchNode.active = true;
+        this.searchPanel.updateShow(param);
+    },
+
+    showChoice:function(param){
+        this.hideAll();
+        this.choiceNode.active = true;
+        this.choicePanel.updateShow(param);
+    },
+
+    showNormalNotice:function(param){
+        this.hideAll();
+        this.normalNoticeNode.active = true;
+        this.normalNoticePanel.updateShow(param);
+    },
+
+    showScreenNotice:function(param){
+        this.hideAll();
+        this.screenNoticeNode.active = true;
+        this.screenNoticePanel.updateShow(param);
+    },
+
+    hideAll:function(){
+        this.searchNode.active = false;
+        this.choiceNode.active = false;
+        this.normalNoticeNode.active = false;
+        this.screenNoticeNode.active = false;
+    },
+
 
     // update (dt) {},
 });
