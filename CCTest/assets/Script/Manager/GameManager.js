@@ -45,6 +45,8 @@ cc.Class({
         // window.Tip.ShowTip("测试TIPS");
     },
 
+
+    //界面操作
     onClickBackpack:function () {
         if (this.isBpOpen) {
             this.closeBackpack();
@@ -97,6 +99,11 @@ cc.Class({
     moveIn:function (target) {
         target.position = new cc.p(0,0);
     }
+
+
+
+
+
 
 
 });
