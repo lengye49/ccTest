@@ -66,7 +66,7 @@ cc.Class({
 
     updateTime:function () {
         var min = this.minutesPassed;
-        var monthNow = parseInt(min / 43200);
+        var monthNow = parseInt(min/43200);
 
         var lastSeason = this.seasonNow;
         this.seasonNow = (monthNow % 12) / 3;
