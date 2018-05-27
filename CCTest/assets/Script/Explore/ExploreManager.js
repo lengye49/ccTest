@@ -22,9 +22,10 @@ cc.Class({
         this.searchPanel = this.searchNode.getComponent('Search');
         this.choicePanel = this.choiceNode.getComponent('Choice');
         this.normalNoticePanel = this.normalNoticeNode.getComponent('Notice');
-        this.screenNoticePanel = this.screenNoticeNode.getComponent('Notice');
+        this.screenNoticePanel = this.screenNoticeNode.getComponent('Screen');
 
         this.hideAll();
+        window.explore = this;
     },
 
     showSearch:function(param){
@@ -58,6 +59,12 @@ cc.Class({
         this.screenNoticeNode.active = false;
     },
 
+    closeNormalNotice:function(){
+        this.showSearch(true);
+    },
 
-    // update (dt) {},
+    closeScreenNotice:function () {
+        this.showSearch(true);
+    },
+
 });

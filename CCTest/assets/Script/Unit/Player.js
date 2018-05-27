@@ -23,6 +23,7 @@ cc.Class({
         //体质：影响生命上限、精力上限
         constitution:30,
         //负重，会影响速度
+        weightMax:100,
         weight:0,
         //金钱
         money:0,
@@ -32,30 +33,64 @@ cc.Class({
         hourNow:0,
         minuteNow:0,
         minutesPassed:0,
-        //
+        //装备
         weapon1 : 0,
         weapon2 : 0,
         armor : 0,
         shoes : 0,
-
+        //离家距离
+        distance : 0,
         //背包
-        backpack:cc.String,
+
     },
 
     onLoad:function(){
         this.HeadView = this.getComponent('HeadView');
+        require("Dictionary");
     },
 
     //根据数据重新配置
     SetPlayerData :function(str) {
         var strs = str.split(";");
-        this.day=parseInt(strs[0]);
+        this.day = parseInt(strs[0]);
         this.hp = parseInt(strs[1]);
-        this.hpMax=parseInt(strs[2]);
-        this.basicAttack=parseInt(strs[3]);
-        this.spirit=parseInt(strs[4]);
-        this.money=parseInt(strs[5]);
-        this.backpack= strs[6].toString();
+        this.hpMax = parseInt(strs[2]);
+        this.basicAttack = parseInt(strs[3]);
+        this.spirit = parseInt(strs[4]);
+        this.money = parseInt(strs[5]);
+        // this.backpack = this.explainBackpack(strs[6]);
+    },
+
+
+
+    //添加物品
+    addItem:function(itemId){
+        this.backpack.add(itemId,1);
+    },
+
+    addItems:function(dic){
+        var i;
+        //遍历问题
+        for(var i in dic){
+            this.backpack.add(i,dic[i]);
+        }
+    },
+
+    //解析背包
+    explainBackpack:function(str){
+        var bp = new this.Dictionary();
+        var strs = str.split(",");
+        var i;
+        for(i=0;i<strs.length;i++){
+            var temp = strs[i].split("|");
+            bp.set(parseInt(temp[0]),parseInt(temp[1]));
+        }
+        return bp;
+    },
+
+    //增加里程
+    addDistance:function(value){
+        this.distance += value;
     },
 
     //增加时间
@@ -91,6 +126,8 @@ cc.Class({
 
         this.HeadView.UpdateView(this);
     },
+
+
 
     //恢复生命
     Heal:function (value) {
@@ -153,6 +190,10 @@ cc.Class({
     RecoverSpirit:function (value) {
         var v = (100-this.spirit>value)?value:(100-this.spirit);
         this.spirit += v;
+    },
+
+    isOverWeight:function () {
+        return this.weight > this.weightMax;
     },
 
 

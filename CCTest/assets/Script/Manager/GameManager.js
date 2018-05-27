@@ -1,13 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
@@ -32,18 +22,31 @@ cc.Class({
 
         window.Tip = this.tipNode.getComponent('Tip');
         window.Battle = this.battleNode.getComponent('BattleManager');
-        // window.Game = this;
+        window.Game = this;
 
-        this.explore = this.exploreNode.getComponent('ExploreManager');
         this.backpack = this.backpackNode.getComponent('BackpackManager');
         this.bottomView = this.bottomNode.getComponent('BottomView');
     },
 
     start () {
         console.log("OnStartMethod");
-        this.explore.showSearch(true);
+        // window.explore.showSearch(true);
         // window.Tip.ShowTip("测试TIPS");
+        // window.explore.showNormalNotice("你是我的超级英雄");
+        var str = new Array();
+        str[0] = "你是我的超级英雄";
+        str[1] = "你不是我的超级英雄";
+        str[3] = "你是我的超级英雄";
+        str[4] = "你不是我的超级英雄";
+        str[5] = "你是我的超级英雄";
+        str[6] = "你不是我的超级英雄";
+        str[7] = "你是我的超级英雄";
+        str[8] = "你不是我的超级英雄";
+        str[9] = "你是我的超级英雄";
+        str[10] = "你不是我的超级英雄";
+        window.explore.showScreenNotice(str);
     },
+
 
 
     //界面操作
@@ -98,7 +101,37 @@ cc.Class({
 
     moveIn:function (target) {
         target.position = new cc.p(0,0);
-    }
+    },
+
+    getReward:function (str) {
+        var s = str.split(",");
+        var items = new Array();
+        var weight = new Array();
+        var i;
+        for(i=0;i<s.length;i++){
+            var ss = s.split("|");
+            items[i] = parseInt(ss[0]);
+            weight[i] = parseInt(ss[1]);
+        }
+        i = this.getRewardIndex(weight);
+        return items[i];
+    },
+
+    getRewardIndex:function(weights){
+        var total = 0;
+        var i;
+        for(i=0;i<weights.length;i++)
+            total+= weights[i];
+        var r = Math.random()*total;
+        total=0;
+        for(i=0;i<weights.length;i++)
+        {
+            total+=weights[i];
+            if(total>=r)
+                return i;
+        }
+        return 0;
+    },
 
 
 
