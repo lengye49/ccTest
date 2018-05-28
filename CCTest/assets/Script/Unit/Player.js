@@ -75,6 +75,14 @@ cc.Class({
         }
     },
 
+    //拿走物品
+    removeItem:function(itemId,count){
+        if(this.backpack[itemId]>count)
+            this.backpack[itemId] -= count;
+        else
+            this.backpack.remove(itemId);
+    },
+
     //获得金钱
     getMoney:function (value) {
         this.money += value;
@@ -197,6 +205,15 @@ cc.Class({
         this.HeadView.UpdateView(this);
     },
 
+    //也可以是奖励物品、金钱
+    addProperty:function(typeStr,value){
+        switch(typeStr){
+            default:
+                this.hp += value;
+                break;
+        }
+    },
+
     RecoverSpirit:function (value) {
         var v = (100-this.spirit>value)?value:(100-this.spirit);
         this.spirit += v;
@@ -208,6 +225,14 @@ cc.Class({
 
     isMoneyEnough:function (value) {
         return this.money >= value;
+    },
+
+    isItemEnough:function (itemId,count) {
+        if(!this.backpack.has(itemId))
+            return false;
+        if(this.backpack[itemId]<count)
+            return false;
+        return true;
     }
 
 });
