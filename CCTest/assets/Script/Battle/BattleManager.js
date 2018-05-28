@@ -58,11 +58,14 @@ cc.Class({
         this.initBattle();
     },
 
-    leaveBattle:function(){
-        this.node.position = cc.p(-3000,0);
-
-        this.NextPanel.active = true;
-        this.NextPanel.position = cc.p(0,0);
+    leaveBattle:function() {
+        this.node.position = cc.p(-3000, 0);
+        if (this.NextPanel === undefined)
+            window.explore.showSearch();
+        else {
+            this.NextPanel.active = true;
+            this.NextPanel.position = cc.p(0, 0);
+        }
     },
 
 

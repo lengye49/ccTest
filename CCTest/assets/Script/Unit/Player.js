@@ -61,19 +61,29 @@ cc.Class({
         // this.backpack = this.explainBackpack(strs[6]);
     },
 
-
-
     //添加物品
     addItem:function(itemId){
         this.backpack.add(itemId,1);
     },
 
+    //添加物品
     addItems:function(dic){
         var i;
         //遍历问题
         for(var i in dic){
             this.backpack.add(i,dic[i]);
         }
+    },
+
+    //获得金钱
+    getMoney:function (value) {
+        this.money += value;
+    },
+
+    //花钱
+    costMoney:function (value) {
+        this.money -= value;
+        this.money = Math.max(0,this.money);
     },
 
     //解析背包
@@ -196,5 +206,8 @@ cc.Class({
         return this.weight > this.weightMax;
     },
 
+    isMoneyEnough:function (value) {
+        return this.money >= value;
+    }
 
 });

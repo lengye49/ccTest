@@ -42,6 +42,8 @@ cc.Class({
                     item.id = itemId;
                     item.name = res[i].name;
                     item.desc = res[i].desc;
+                    item.price = res[i].price;
+                    item.canTier = res[i].canTier;
                     break;
                 }
             }

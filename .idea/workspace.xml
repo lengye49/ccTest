@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="587fef63-563d-4c2c-aafd-ec3784d3a5d8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CCTest/assets/Scene/A.fire" afterPath="$PROJECT_DIR$/CCTest/assets/Scene/A.fire" />
+      <change beforePath="$PROJECT_DIR$/CCTest/assets/Script/Battle/BattleManager.js" afterPath="$PROJECT_DIR$/CCTest/assets/Script/Battle/BattleManager.js" />
+      <change beforePath="$PROJECT_DIR$/CCTest/assets/Script/Explore/Choice.js" afterPath="$PROJECT_DIR$/CCTest/assets/Script/Explore/Choice.js" />
+      <change beforePath="$PROJECT_DIR$/CCTest/assets/Script/Explore/ExploreManager.js" afterPath="$PROJECT_DIR$/CCTest/assets/Script/Explore/ExploreManager.js" />
       <change beforePath="$PROJECT_DIR$/CCTest/assets/Script/ReadJson/ReadJson.js" afterPath="$PROJECT_DIR$/CCTest/assets/Script/ReadJson/ReadJson.js" />
       <change beforePath="$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js" afterPath="$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js" />
+      <change beforePath="$PROJECT_DIR$/Design/工作内容计划表.xlsx" afterPath="$PROJECT_DIR$/Design/工作内容计划表.xlsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,31 +22,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Manager/GameManager.js">
+      <file leaf-file-name="Choice.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Explore/Choice.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="30" column="68" lean-forward="false" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="68" />
+            <state relative-caret-position="383">
+              <caret line="119" column="44" lean-forward="true" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
+              <folding>
+                <element signature="e#723#1018#0" expanded="false" />
+                <element signature="e#1678#2590#0" expanded="false" />
+                <element signature="e#2626#3560#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tip.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Tip.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UseItem.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Item/UseItem.js">
+      <file leaf-file-name="BattleManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Battle/BattleManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="548">
+              <caret line="68" column="5" lean-forward="false" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReadJson.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadJson.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/ReadJson/ReadJson.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1031">
-              <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+            <state relative-caret-position="412">
+              <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -54,8 +73,8 @@
       <file leaf-file-name="Player.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="786">
-              <caret line="68" column="43" lean-forward="false" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+            <state relative-caret-position="516">
+              <caret line="82" column="6" lean-forward="false" selection-start-line="82" selection-start-column="6" selection-end-line="82" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -76,8 +95,11 @@
         <option value="$PROJECT_DIR$/CCTest/assets/Script/GameManager.js" />
         <option value="$PROJECT_DIR$/CCTest/assets/Script/Manager/GameManager.js" />
         <option value="$PROJECT_DIR$/CCTest/assets/Script/Item/Item.js" />
+        <option value="$PROJECT_DIR$/CCTest/assets/Script/Explore/ExploreManager.js" />
+        <option value="$PROJECT_DIR$/CCTest/assets/Script/Battle/BattleManager.js" />
         <option value="$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js" />
         <option value="$PROJECT_DIR$/CCTest/assets/Script/ReadJson/ReadJson.js" />
+        <option value="$PROJECT_DIR$/CCTest/assets/Script/Explore/Choice.js" />
       </list>
     </option>
   </component>
@@ -94,7 +116,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1967" />
+    <option name="x" value="1940" />
     <option name="y" value="23" />
     <option name="width" value="1870" />
     <option name="height" value="1057" />
@@ -143,6 +165,22 @@
               <item name="CCTest" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="Script" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccTest" type="462c0819:PsiDirectoryNode" />
+              <item name="CCTest" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="Script" type="462c0819:PsiDirectoryNode" />
+              <item name="Battle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccTest" type="462c0819:PsiDirectoryNode" />
+              <item name="CCTest" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="Script" type="462c0819:PsiDirectoryNode" />
+              <item name="Explore" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ccTest" type="b2602c69:ProjectViewProjectNode" />
@@ -220,14 +258,15 @@
       <workItem from="1527123759607" duration="554000" />
       <workItem from="1527124338458" duration="698000" />
       <workItem from="1527209398906" duration="3969000" />
+      <workItem from="1527469823407" duration="4167000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10202000" />
+    <option name="totallyTimeSpent" value="14369000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1967" y="23" width="1870" height="1057" extended-state="0" />
+    <frame x="1940" y="23" width="1870" height="1057" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -259,6 +298,40 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Manager/GameManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="68" lean-forward="false" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Item/UseItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="68" column="43" lean-forward="false" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/ReadJson/ReadJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Manager/GameManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -299,26 +372,12 @@
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/GameManager.js" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Player.js.meta" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Player.js" />
-    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Explore/ExploreManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/PanelManager.js" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/BackpackManager.js" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/HeadView.js" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/BottomView.js" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/GameManager.js" />
-    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Item/Item.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Item/Item.js" />
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Item/UseItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -327,28 +386,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Manager/GameManager.js">
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/ReadJson/Dictionary.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="30" column="68" lean-forward="false" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="68" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js">
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Battle/BattleLog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="786">
-          <caret line="68" column="43" lean-forward="false" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Manager/GameManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="20" column="68" lean-forward="false" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Explore/ExploreManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="886">
+          <caret line="70" column="30" lean-forward="false" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Battle/BattleManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="68" column="5" lean-forward="false" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/ReadJson/ReadJson.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1031">
-          <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+        <state relative-caret-position="412">
+          <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Unit/Player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="82" column="6" lean-forward="false" selection-start-line="82" selection-start-column="6" selection-end-line="82" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Tip.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCTest/assets/Script/Explore/Choice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="119" column="44" lean-forward="true" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
+          <folding>
+            <element signature="e#723#1018#0" expanded="false" />
+            <element signature="e#1678#2590#0" expanded="false" />
+            <element signature="e#2626#3560#0" expanded="false" />
           </folding>
         </state>
       </provider>

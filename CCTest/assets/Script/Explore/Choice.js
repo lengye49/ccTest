@@ -28,32 +28,123 @@ cc.Class({
         choice3Text:cc.Label,
     },
 
+    Choice:function () {
+        var name = "Hello";
+        var desc = "Desc";
+        var params = new Array();
+        params[0] = "0|不买，走了";//离开的格式 0|文本
+        params[1] = "1|奸商，抢他|1001";//抢劫的格式 1|文本|enemyId
+        params[2] = "2|买个AK47|100";//购买的格式 2|文本|物品id
+        params[3] = "3|卖出1个烟头|100";//卖出的格式 3|文本|物品id
+        params[4] = "4|卖出所有烟头|100";//卖出的格式 4|文本|物品id
+        //动态需求，根据玩家当前状态向玩家索要东西
+        params[5] = "5|给他一个面包|100|confidence,5"//赠与物品的格式 5|文本|物品id|奖励的属性、金钱
+        params[6] = "6|给他点钱|0.2|item,100"//赠与金钱的格式 6|文本|金钱数量|奖励的属性、物品
+        params[7] = "7|我也没钱|cruel,2"//拒绝赠与的格式 7|文本|需求的数量|奖励的属性、物品
+    },
+
+
     updataShow:function (choice) {
+        this.presentChoice = choice;
+
         this.nameLabel.string = choice.name;
         this.descLabel.string = choice.desc;
+        this.choice0Text.string = this.getChoiceText(choice.params[0]);
 
-        this.choice0Text.string = choice.text0;
-
-        if(choice.choicesCount>1){
+        if (choice.params.length > 1) {
             this.choice1.node.active = true;
-            this.choice1Text.string = choice.text1;
-        }else{
+            this.choice1Text.string = this.getChoiceText(choice.params[1]);
+        } else {
             this.choice1.node.active = false;
         }
 
-        if(choice.choicesCount>2){
-            this.choice2Text.string = choice.text2;
+        if (choice.params.length > 2) {
+            this.choice2Text.string = this.getChoiceText(choice.params[2]);
             this.choice2.node.active = true;
-        }else{
+        } else {
             this.choice2.node.active = false;
         }
 
-        if(choice.choicesCount>3){
-            this.choice3Text.string = choice.text3;
+        if (choice.params.length > 3) {
+            this.choice3Text.string = this.getChoiceText(choice.params[3]);
             this.choice3.node.active = true;
-        }else{
+        } else {
             this.choice3.node.active = false;
         }
-    }
+    },
+
+    getChoiceText:function (str) {
+        var s = str.split("|");
+        var ss = s[1];
+        switch(parseInt(s[0])) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                ss += "(" + window.ReadJson.getItem(parseInt(s[2])).price + ")";
+                break;
+            case 3:
+                ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
+                break;
+            case 4:
+                ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
+                break;
+            case 5:
+                ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
+                break;
+            case 6:
+                var v = Math.min(5, Math.ceil(0.1 * window.Player.money));
+                ss += "(" + v + "元)";
+                break;
+            case 7:
+                break;
+            default:
+                break;
+        }
+        return ss;
+    },
+
+    makeChoice:function (index) {
+        var s = this.presentChoice.params[index].split("|");
+        switch(parseInt(s[0])) {
+            case 0:
+                window.explore.showSearch(true);
+                break;
+            case 1:
+                var ids = new Array();
+                ids[0] = parseInt(s[2]);
+                window.Battle.startBattle(ids,this.node,undefined);
+                break;
+            case 2:
+                var itemId = parseInt(s[2]);
+                var cost = window.ReadJson.getItem(itemId).price;
+                if(!window.Player.isMoneyEnough(cost)){
+                    window.Tip.ShowTip("你的钱不够！");
+                    break;
+                }
+                window.Player.costMoney(cost);
+                window.Player.addItem(itemId);
+                break;
+            case 3:
+                // ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
+                break;
+            case 4:
+                // ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
+                break;
+            case 5:
+                // ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
+                break;
+            case 6:
+                // var v = Math.min(5, Math.ceil(0.1 * window.Player.money));
+                // ss += "(" + v + "元)";
+                break;
+            case 7:
+                break;
+            default:
+                break;
+        }
+    },
+
 
 });

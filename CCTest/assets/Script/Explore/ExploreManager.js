@@ -67,4 +67,8 @@ cc.Class({
         this.showSearch(true);
     },
 
+    closeChoice:function () {
+        this.showSearch(true);
+    }
+
 });
