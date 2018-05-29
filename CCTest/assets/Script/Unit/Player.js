@@ -40,13 +40,14 @@ cc.Class({
         shoes : 0,
         //离家距离
         distance : 0,
-        //背包
+
+        //性格属性
 
     },
 
     onLoad:function(){
         this.HeadView = this.getComponent('HeadView');
-        require("Dictionary");
+
     },
 
     //根据数据重新配置
@@ -58,13 +59,31 @@ cc.Class({
         this.basicAttack = parseInt(strs[3]);
         this.spirit = parseInt(strs[4]);
         this.money = parseInt(strs[5]);
-        // this.backpack = this.explainBackpack(strs[6]);
+        this.backpack = this.explainBackpack(strs[6]);
     },
 
-    //添加物品
-    addItem:function(itemId){
-        this.backpack.add(itemId,1);
+    //解析背包
+    explainBackpack:function(str){
+        var bp = this.Dictionary();
+        var s = str.split(",");
+        var i;
+        for(i=0;i<s.length;i++){
+            var temp = s[i].split("|");
+            bp.set(parseInt(temp[0]),parseInt(temp[1]));
+        }
+        return bp;
     },
+
+
+
+    //添加物品
+    addItem:function(itemId,count) {
+        if (arguments.length === 1)
+            this.backpack.add(itemId, 1);
+        else
+            this.backpack.add(itemId, count);
+    },
+
 
     //添加物品
     addItems:function(dic){
@@ -94,17 +113,6 @@ cc.Class({
         this.money = Math.max(0,this.money);
     },
 
-    //解析背包
-    explainBackpack:function(str){
-        var bp = new this.Dictionary();
-        var strs = str.split(",");
-        var i;
-        for(i=0;i<strs.length;i++){
-            var temp = strs[i].split("|");
-            bp.set(parseInt(temp[0]),parseInt(temp[1]));
-        }
-        return bp;
-    },
 
     //增加里程
     addDistance:function(value){
@@ -205,19 +213,49 @@ cc.Class({
         this.HeadView.UpdateView(this);
     },
 
-    //也可以是奖励物品、金钱
-    addProperty:function(typeStr,value){
-        switch(typeStr){
-            default:
-                this.hp += value;
-                break;
-        }
-    },
-
     RecoverSpirit:function (value) {
         var v = (100-this.spirit>value)?value:(100-this.spirit);
         this.spirit += v;
     },
+
+    //添加单项奖励
+    addReward:function (str) {
+        var s = str.split(",");
+        switch(s){
+            case "cash":
+                this.getMoney(parseInt(s[1]));
+                break;
+            case "item":
+                this.addItem(parseInt(s[1]),parseInt(s[2]));
+                break;
+            case "hp":
+                this.Heal(parseInt(s[1]));
+                break;
+            case "spirit":
+                this.RecoverSpirit(parseInt(s[1]));
+                break;
+            default:
+                break;
+        }
+
+    },
+
+    //格式item,1000,1;confidence,1;hp,1之类的，用分号隔开
+    addRewards:function (str) {
+        //拆分
+        var strs = new Array();
+        if(str.indexOf(";")){
+            strs = str.split(";");
+        }else{
+            strs[0] = str;
+        }
+        //添加
+        var i;
+        for(i=0;i<strs.length;i++){
+            this.addReward(strs[i]);
+        }
+    },
+
 
     isOverWeight:function () {
         return this.weight > this.weightMax;
@@ -233,6 +271,74 @@ cc.Class({
         if(this.backpack[itemId]<count)
             return false;
         return true;
+    }
+
+
+
+    Dictionary:function () {
+        var items = {};
+
+        this.has = function(key){
+            return key in items;
+        };
+
+        this.set = function (key,value) {
+            items[key] = value;
+        };
+
+        this.add = function (key,value) {
+            if(this.has(key)){
+                items[key] += value;
+            }else{
+                this.set(key,value);
+            }
+            return value;
+        };
+
+        this.use = function (key,value) {
+            if(this.has(key)){
+                if(items[key]>value){
+                    items[key] -= vlaue;
+                    return true;
+                }
+                else if(items[key] === value){
+                    this.remove(key);
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        this.count = function (key) {
+            if (this.has(key)) {
+                return items[key];
+            }
+            return 0;
+        };
+
+        this.remove = function (key) {
+            if(this.has(key)){
+                delete items[key];
+                return true;
+            }
+            return false;
+        };
+
+        this.get = function (key) {
+            return this.has(key)?items[key]:undefined;
+        };
+
+        this.getItems = function () {
+            return items;
+        };
+
+        this.size = function () {
+            return Object.keys(items).length;
+        };
+
+        this.clear = function () {
+            items = {};
+        };
     }
 
 });

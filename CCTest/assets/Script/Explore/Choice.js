@@ -38,9 +38,9 @@ cc.Class({
         params[3] = "3|卖出1个烟头|100";//卖出的格式 3|文本|物品id
         params[4] = "4|卖出所有烟头|100";//卖出的格式 4|文本|物品id
         //动态需求，根据玩家当前状态向玩家索要东西
-        params[5] = "5|给他一个面包|100|1|confidence|5"//赠与物品的格式 5|文本|物品id|数量|奖励的属性、金钱、物品|值
-        params[6] = "6|给他点钱|0.2|item,100"//赠与金钱的格式 6|文本|金钱数量|奖励的属性、物品
-        params[7] = "7|我也没钱|cruel,2"//拒绝赠与的格式 7|文本|需求的数量|奖励的属性、物品
+        params[5] = "5|给他一个面包|100|1|confidence,1;item,1000,1;hp,1|你真是一个善良的人"//赠与物品的格式 5|文本|物品id|数量|奖励的属性、金钱、物品|之后说的话
+        params[6] = "6|给他点钱|2|item,1000,2|你真是一个好人"//赠与金钱的格式 6|文本|金钱数量|奖励的属性、物品
+        params[7] = "7|我也没钱|cruel,2|算了，祝你好运！"//拒绝赠与的格式 7|文本|需求的数量|奖励的属性、物品
     },
 
 
@@ -94,7 +94,7 @@ cc.Class({
                 ss += "(剩余" + window.Player.backpack[parseInt(s[2])] + ")";
                 break;
             case 6:
-                var v = Math.min(5, Math.ceil(0.1 * window.Player.money));
+                var v = Math.min(parseInt(s[2]), Math.ceil(0.1 * window.Player.money));
                 ss += "(" + v + "元)";
                 break;
             case 7:
@@ -148,13 +148,29 @@ cc.Class({
                 break;
             case 5:
                 var itemId = parseInt(s[2]);
-
+                var count = parseInt(s[3]);
+                if(!window.Player.isItemEnough(itemId,count)){
+                    window.Tip.ShowTip("数量不足！");
+                    break;
+                }
+                window.Player.removeItem(itemId,count);
+                window.Player.addRewards(s[4]);
+                window.explore.showNormalNotice(s[5]);
                 break;
             case 6:
-                // var v = Math.min(5, Math.ceil(0.1 * window.Player.money));
-                // ss += "(" + v + "元)";
+                var v = Math.min(parseInt(s[2]), Math.ceil(0.1 * window.Player.money));
+                if(!window.Player.isMoneyEnough(v))
+                {
+                    window.Tip.ShowTip("你没有那么多钱！");
+                    break;
+                }
+                window.Player.costMoney(v);
+                window.Player.addRewards(s[3]);
+                window.explore.showNormalNotice(s[4]);
                 break;
             case 7:
+                window.Player.addRewards(s[2]);
+                window.explore.showNormalNotice(s[3]);
                 break;
             default:
                 break;
