@@ -271,7 +271,7 @@ cc.Class({
         if(this.backpack[itemId]<count)
             return false;
         return true;
-    }
+    },
 
 
 
@@ -339,6 +339,6 @@ cc.Class({
         this.clear = function () {
             items = {};
         };
-    }
+    },
 
 });
