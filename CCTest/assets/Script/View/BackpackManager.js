@@ -4,6 +4,7 @@ cc.Class({
 
     properties: {
         cell:cc.Prefab,
+        itemTip:cc.Node,
     },
 
 
@@ -15,4 +16,13 @@ cc.Class({
     updateShow:function () {
 
     },
+
+    showItemTips:function () {
+        this.itemTip.active = true;
+        this.itemTip.node.position = cc.p(0,0);
+    },
+
+    closeItemTips:function () {
+        this.itemTip.active = false;
+    }
 });
