@@ -36,6 +36,9 @@ cc.Class({
         rate:0.0,
         heroCD:0.0,
         enemyCD:0.0,
+
+        //战斗时隐藏底部UI
+        bottomUi:cc.Node,
     },
 
     onLoad:function(){
@@ -44,13 +47,12 @@ cc.Class({
         this.enemy = new Unit();
     },
 
-    start:function () {
-
-    },
 
     startBattle:function(enemyIds,lastPanel,nextPanel){
         lastPanel.active = false;
         this.NextPanel = nextPanel;
+        this.bottomUi.active = false;
+
         this.node.position = cc.p(0,0);
         //根据id生成敌人
         this.enemyIds = enemyIds;
@@ -66,6 +68,7 @@ cc.Class({
             this.NextPanel.active = true;
             this.NextPanel.position = cc.p(0, 0);
         }
+        this.bottomUi.active = true;
     },
 
 

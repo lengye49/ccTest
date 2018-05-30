@@ -43,6 +43,9 @@ cc.Class({
                     item.name = res[i].name;
                     item.desc = res[i].desc;
                     item.price = res[i].price;
+                    item.type = res[i].type;
+                    item.effects = res[i].effects;
+                    item.ammo = res[i].ammo;//弹药种类 1箭2子弹
                     item.canTier = res[i].canTier;
                     break;
                 }

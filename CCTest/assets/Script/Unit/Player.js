@@ -64,7 +64,7 @@ cc.Class({
 
     //解析背包
     explainBackpack:function(str){
-        var bp = this.Dictionary();
+        var bp = new this.Dictionary();
         var s = str.split(",");
         var i;
         for(i=0;i<s.length;i++){
@@ -150,7 +150,7 @@ cc.Class({
 
         this.minuteNow = min % 60;
 
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
     },
 
 
@@ -159,14 +159,14 @@ cc.Class({
     Heal:function (value) {
         var healValue = (value > this.hpMax - this.hp) ? (this.hpMax - this.hp) : (value);
         this.hp += healValue;
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
     },
 
     //受到伤害
     Damage:function (value) {
         var damageValue = value>this.hp?this.hp:value;
         this.hp-=damageValue;
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
 
         //被打死
         if(this.hp<=0)
@@ -177,14 +177,14 @@ cc.Class({
     Eat:function (value) {
         var eatValue = (value > 100 - this.food) ? (100 - this.food) : value;
         this.food += eatValue;
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
     },
 
     //喝水
     Drink:function(value){
         var drinkValue = (value > 100 - this.water) ? (100 - this.water) : value;
         this.water += drinkValue;
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
     },
 
     //时间消耗食物和水,每小时1点
@@ -195,7 +195,7 @@ cc.Class({
         v = this.water>value?value:this.water;
         this.water-=v;
 
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
 
         if(this.food<=0)
             console.log("饿死！");
@@ -210,7 +210,7 @@ cc.Class({
 
         this.ConsumeFoodAndWater(value);
         this.RecoverSpirit(value);
-        this.HeadView.UpdateView(this);
+        this.HeadView.UpdateView();
     },
 
     RecoverSpirit:function (value) {

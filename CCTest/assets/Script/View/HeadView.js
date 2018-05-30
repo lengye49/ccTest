@@ -13,18 +13,25 @@ cc.Class({
         timeLabel:cc.Label,
     },
 
-    UpdateView:function (player) {
-        this.lifeLabel.string = player.hp + "/" + player.hpMax;
-        this.foodLabel.string = player.food;
+    UpdateView:function () {
+        this.lifeLabel.string = window.Player.hp + "/" + window.Player.hpMax;
+        this.lifeLabel.node.color = this.valueColor(window.Player.hp / window.Player.hpMax);
+
+        this.foodLabel.string = window.Player.food;
+        this.foodLabel.node.color = this.valueColor(window.Player.food / 100);
+
         this.spiritLabel.string = player.spirit;
-        this.moneyLabel.string = player.money;
-        this.dateLabel.string = player.dayNow;
-        this.timeLabel.string = player.hourNow + ":" + player.minuteNow;
-        this.seasonLabel.string = this.SeasonString(player.seasonNow);
-        this.seasonLabel.node.color = this.SeasonColor(player.seasonNow);
+        this.spiritLabel.node.color = this.valueColor(window.Player.spirit / 100);
+
+        this.moneyLabel.string = window.Player.money;
+        this.dateLabel.string = window.Player.dayNow;
+        this.timeLabel.string = window.Player.hourNow + ":" + window.Player.minuteNow;
+
+        this.seasonLabel.string = this.seasonString(window.Player.seasonNow);
+        this.seasonLabel.node.color = this.seasonColor(window.Player.seasonNow);
     },
 
-    SeasonString:function (index) {
+    seasonString:function (index) {
         switch (index){
             case 0:
                 return "春";
@@ -39,7 +46,7 @@ cc.Class({
         }
     },
 
-    SeasonColor:function (index) {
+    seasonColor:function (index) {
         switch(index){
             case 0:
                 return cc.Color.GREEN;
@@ -51,5 +58,13 @@ cc.Class({
                 return cc.Color.White;
             default:
         }
+    },
+
+    valueColor:function (value) {
+        if(value<30)
+            return cc.Color.RED;
+        if(value<60)
+            return cc.Color.YELLOW;
+        return cc.Color.BLACK;
     }
 });
