@@ -139,7 +139,7 @@ cc.Class({
         else
         {
             var dmg = this.CalDamage(this.enemy.attack,window.Player.defence,this.CalCrit());
-            window.Player.Damage(dmg);
+            window.Player.damage(dmg);
         }
         this.enemyCD+=1;
     },

@@ -12,19 +12,20 @@ cc.Class({
 
     },
 
-    updateShow:function (item,count,manager) {
+    updateShow:function (itemId,count,manager) {
+        this.item = window.ReadJson.getItem(itemId);
         this.Manager = manager;
 
         // this.background.color = this.bgColor(index);
         if(count>0)
-            this.itemName.string = item.name + "×" + count;
+            this.itemName.string = this.item.name + "×" + count;
         else
-            this.itemName.string = item.name;
-        this.weight.string = item.weight * count + "kg";
+            this.itemName.string = this.item.name;
+        this.weight.string = this.item.weight * count + "kg";
     },
 
     onClick:function () {
-        this.Manager.showItemTips();
+        this.Manager.showItemTips(this.item,false);
     },
 
     // bgColor:function (index) {

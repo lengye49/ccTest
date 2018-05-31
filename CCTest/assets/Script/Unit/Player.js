@@ -43,6 +43,7 @@ cc.Class({
 
         //性格属性
 
+
     },
 
     onLoad:function(){
@@ -94,12 +95,17 @@ cc.Class({
         }
     },
 
-    //拿走物品
+    //删除物品
     removeItem:function(itemId,count){
         if(this.backpack[itemId]>count)
             this.backpack[itemId] -= count;
         else
-            this.backpack.remove(itemId);
+            this.removeAllItems(itemId);
+    },
+
+    //删除所有物品
+    removeAllItems:function (itemId) {
+        this.backpack.remove(itemId);
     },
 
     //获得金钱
@@ -156,14 +162,14 @@ cc.Class({
 
 
     //恢复生命
-    Heal:function (value) {
+    heal:function (value) {
         var healValue = (value > this.hpMax - this.hp) ? (this.hpMax - this.hp) : (value);
         this.hp += healValue;
         this.HeadView.UpdateView();
     },
 
     //受到伤害
-    Damage:function (value) {
+    damage:function (value) {
         var damageValue = value>this.hp?this.hp:value;
         this.hp-=damageValue;
         this.HeadView.UpdateView();
@@ -174,14 +180,14 @@ cc.Class({
     },
 
     //吃食物
-    Eat:function (value) {
+    addFood:function (value) {
         var eatValue = (value > 100 - this.food) ? (100 - this.food) : value;
         this.food += eatValue;
         this.HeadView.UpdateView();
     },
 
     //喝水
-    Drink:function(value){
+    addWater:function(value){
         var drinkValue = (value > 100 - this.water) ? (100 - this.water) : value;
         this.water += drinkValue;
         this.HeadView.UpdateView();
@@ -229,7 +235,7 @@ cc.Class({
                 this.addItem(parseInt(s[1]),parseInt(s[2]));
                 break;
             case "hp":
-                this.Heal(parseInt(s[1]));
+                this.heal(parseInt(s[1]));
                 break;
             case "spirit":
                 this.RecoverSpirit(parseInt(s[1]));
