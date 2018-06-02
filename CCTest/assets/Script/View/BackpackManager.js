@@ -6,6 +6,18 @@ cc.Class({
         cell:cc.Prefab,
         itemContainer:cc.Node,
         itemTipNode:cc.Node,
+
+        weapon1Btn:cc.Button,
+        weapon1Label:cc.Label,
+
+        weapon2Btn:cc.Button,
+        weapon2Label:cc.Label,
+
+        armorBtn:cc.Button,
+        armorLabel:cc.Label,
+
+        shoesBtn:cc.Button,
+        shoesLabel:cc.Label,
     },
 
 
@@ -32,9 +44,22 @@ cc.Class({
         this.updateEquipedItems();
     },
 
-    //更新已装备，toDo
+    //更新装备信息
     updateEquipedItems:function () {
-        //没有装备的不能点击
+        this.refreshEquipState(window.Player.weapon1,this.weapon1Label,this.weapon1Btn);
+        this.refreshEquipState(window.Player.weapon2,this.weapon2Label,this.weapon2Btn);
+        this.refreshEquipState(window.Player.armor,this.armorLabel,this.armorBtn);
+        this.refreshEquipState(window.Player.shoes,this.shoesLabel,this.shoesBtn);
+    },
+
+    refreshEquipState:function (equipId,equipLabel,equipBtn) {
+        if(equipId>0){
+            equipLabel.string = window.ReadJson.getItem(equipId).name;
+            equipBtn.interactable = true;
+        }else{
+            equipLabel.string = "";
+            equipBtn.interactable = false;
+        }
     },
 
     requireCell:function (index) {
@@ -167,12 +192,13 @@ cc.Class({
     },
 
     addItemInShow:function(){
-        window.Player.addItem(this.itemInShow.id,1);
+        //这一句放到Player里
+        // window.Player.addItem(this.itemInShow.id,1);
         this.updateShow();
     },
 
     useItemInShow:function () {
-        window.Player.removeItem(this.itemInShow.id,1);
+        // window.Player.removeItem(this.itemInShow.id,1);
         this.updateShow();
     },
 

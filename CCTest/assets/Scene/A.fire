@@ -5468,6 +5468,30 @@
     "itemContainer": null,
     "itemTipNode": {
       "__id__": 110
+    },
+    "weapon1Btn": {
+      "__id__": 11
+    },
+    "weapon1Label": {
+      "__id__": 8
+    },
+    "weapon2Btn": {
+      "__id__": 18
+    },
+    "weapon2Label": {
+      "__id__": 15
+    },
+    "armorBtn": {
+      "__id__": 25
+    },
+    "armorLabel": {
+      "__id__": 22
+    },
+    "shoesBtn": {
+      "__id__": 32
+    },
+    "shoesLabel": {
+      "__id__": 29
     }
   },
   {
@@ -15660,8 +15684,11 @@
     "hp": 100,
     "hpMax": 100,
     "attack": 0,
+    "basicAtk": 10,
     "defence": 0,
+    "basicDef": 1,
     "speed": 0,
+    "basicSpeed": 1,
     "escapeProficiency": 0,
     "meleeProficiency": 0,
     "rangedProficiency": 0,

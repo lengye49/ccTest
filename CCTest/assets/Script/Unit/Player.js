@@ -7,38 +7,46 @@ cc.Class({
         hp : 100,
         hpMax : 100,
         attack:10,
+        basicAtk:10,
         defence:0,
-        speed:0,
+        basicDef:1,
+        speed:0.0,
+        basicSpeed:1,
 
         //熟练度
         escapeProficiency:0,
         meleeProficiency:0,
         rangedProficiency:0,
-        //速度：
-        speed:2.0,
+
         //精力：影响探索
         spirit : 100,
         food : 100,
         water : 100,
+
         //体质：影响生命上限、精力上限
         constitution:30,
-        //负重，会影响速度
+
+        //负重，超重会影响速度
         weightMax:100,
         weight:0,
+
         //金钱
         money:0,
+
         //时间
         seasonNow:0,
         dayNow:1,
         hourNow:0,
         minuteNow:0,
         minutesPassed:0,
+
         //装备
         weapon1 : 0,
         weapon2 : 0,
         armor : 0,
         shoes : 0,
-        //离家距离
+
+        //行走距离
         distance : 0,
 
         //性格属性
@@ -75,8 +83,190 @@ cc.Class({
         return bp;
     },
 
+//*************************************更新基础属性************************************
+    initProperties:function () {
+
+    },
+
+    putOnEquip:function (equipId) {
+        var equip = window.ReadJson.getItem(equipId);
+        switch (equip.type){
+            case 0:
+                this.weapon1 = equip.id;
+                this.initProperties();
+                this.backpack.removeItem(equip.id,1);
+                break;
+            case 1:
+                this.armor = equip.id;
+                this.initProperties();
+                this.backpack.removeItem(equip.id,1);
+                break;
+            case 2:
+                this.shoes = equip.id;
+                this.initProperties();
+                this.backpack.removeItem(equip.id,1);
+                break;
+            case 6:
+            case 7:
+                this.weapon2 = equip.id;
+                this.initProperties();
+                this.backpack.removeItem(equip.id,1);
+                break;
+            default:
+                window.Tip.ShowTip("该物品不可装备！");
+                break;
+        }
+    },
+
+    takeOffEquip:function (equipId) {
+        var equip = window.ReadJson.getItem(equipId);
+        switch (equip.type) {
+            case 0:
+                if (this.weapon1 != equipId) {
+                    window.Tip.ShowTip("数据错误，请重试！");
+                    return;
+                } else
+                    this.weapon1 = 0;
+                break;
+            case 1:
+                if (this.armor != equipId) {
+                    window.Tip.ShowTip("数据错误，请重试！");
+                    return;
+                } else
+                    this.armor = 0;
+                break;
+            case 2:
+                if (this.shoes != equipId) {
+                    window.Tip.ShowTip("数据错误，请重试！");
+                    return;
+                } else
+                    this.shoes = 0;
+                break;
+            case 6:
+            case 7:
+                if (this.weapon2 != equipId) {
+                    window.Tip.ShowTip("数据错误，请重试！");
+                    return;
+                } else
+                    this.weapon2 = 0;
+                break;
+            default:
+                window.Tip.ShowTip("数据错误，请重试！");
+                break;
+        }
+        this.initProperties();
+    },
 
 
+
+
+ //*************************************更新属性************************************
+
+    //恢复生命
+    heal:function (value) {
+        var healValue = (value > this.hpMax - this.hp) ? (this.hpMax - this.hp) : (value);
+        this.hp += healValue;
+        this.HeadView.UpdateView();
+    },
+
+    //受到伤害
+    damage:function (value) {
+        var damageValue = value>this.hp?this.hp:value;
+        this.hp-=damageValue;
+        this.HeadView.UpdateView();
+
+        //被打死
+        if(this.hp<=0)
+            console.log("被打死！");
+    },
+
+    //吃食物
+    addFood:function (value) {
+        var eatValue = (value > 100 - this.food) ? (100 - this.food) : value;
+        this.food += eatValue;
+        this.HeadView.UpdateView();
+    },
+
+    //喝水
+    addWater:function(value){
+        var drinkValue = (value > 100 - this.water) ? (100 - this.water) : value;
+        this.water += drinkValue;
+        this.HeadView.UpdateView();
+    },
+
+    //时间消耗食物和水,每小时1点
+    ConsumeFoodAndWater:function (value) {
+        var v = this.food>value?value:this.food;
+        this.food -= v;
+
+        v = this.water>value?value:this.water;
+        this.water-=v;
+
+        this.HeadView.UpdateView();
+
+        if(this.food<=0)
+            console.log("饿死！");
+
+        if(this.water<=0)
+            console.log("渴死！");
+    },
+
+    Sleep:function(value){
+
+        this.addMinutes(value*60);
+
+        this.ConsumeFoodAndWater(value);
+        this.RecoverSpirit(value);
+        this.HeadView.UpdateView();
+    },
+
+    RecoverSpirit:function (value) {
+        var v = (100-this.spirit>value)?value:(100-this.spirit);
+        this.spirit += v;
+    },
+
+ //*************************************获得奖励************************************
+
+    //添加单项奖励
+    addReward:function (str) {
+        var s = str.split(",");
+        switch(s){
+            case "cash":
+                this.getMoney(parseInt(s[1]));
+                break;
+            case "item":
+                this.addItem(parseInt(s[1]),parseInt(s[2]));
+                break;
+            case "hp":
+                this.heal(parseInt(s[1]));
+                break;
+            case "spirit":
+                this.RecoverSpirit(parseInt(s[1]));
+                break;
+            default:
+                break;
+        }
+
+    },
+
+    //格式item,1000,1;confidence,1;hp,1之类的，用分号隔开
+    addRewards:function (str) {
+        //拆分
+        var strs = new Array();
+        if(str.indexOf(";")){
+            strs = str.split(";");
+        }else{
+            strs[0] = str;
+        }
+        //添加
+        var i;
+        for(i=0;i<strs.length;i++){
+            this.addReward(strs[i]);
+        }
+    },
+
+
+ //*************************************更新资源************************************
     //添加物品
     addItem:function(itemId,count) {
         if (arguments.length === 1)
@@ -84,7 +274,6 @@ cc.Class({
         else
             this.backpack.add(itemId, count);
     },
-
 
     //添加物品
     addItems:function(dic){
@@ -160,108 +349,7 @@ cc.Class({
     },
 
 
-
-    //恢复生命
-    heal:function (value) {
-        var healValue = (value > this.hpMax - this.hp) ? (this.hpMax - this.hp) : (value);
-        this.hp += healValue;
-        this.HeadView.UpdateView();
-    },
-
-    //受到伤害
-    damage:function (value) {
-        var damageValue = value>this.hp?this.hp:value;
-        this.hp-=damageValue;
-        this.HeadView.UpdateView();
-
-        //被打死
-        if(this.hp<=0)
-            console.log("被打死！");
-    },
-
-    //吃食物
-    addFood:function (value) {
-        var eatValue = (value > 100 - this.food) ? (100 - this.food) : value;
-        this.food += eatValue;
-        this.HeadView.UpdateView();
-    },
-
-    //喝水
-    addWater:function(value){
-        var drinkValue = (value > 100 - this.water) ? (100 - this.water) : value;
-        this.water += drinkValue;
-        this.HeadView.UpdateView();
-    },
-
-    //时间消耗食物和水,每小时1点
-    ConsumeFoodAndWater:function (value) {
-        var v = this.food>value?value:this.food;
-        this.food -= v;
-
-        v = this.water>value?value:this.water;
-        this.water-=v;
-
-        this.HeadView.UpdateView();
-
-        if(this.food<=0)
-            console.log("饿死！");
-
-        if(this.water<=0)
-            console.log("渴死！");
-    },
-
-    Sleep:function(value){
-
-        this.addMinutes(value*60);
-
-        this.ConsumeFoodAndWater(value);
-        this.RecoverSpirit(value);
-        this.HeadView.UpdateView();
-    },
-
-    RecoverSpirit:function (value) {
-        var v = (100-this.spirit>value)?value:(100-this.spirit);
-        this.spirit += v;
-    },
-
-    //添加单项奖励
-    addReward:function (str) {
-        var s = str.split(",");
-        switch(s){
-            case "cash":
-                this.getMoney(parseInt(s[1]));
-                break;
-            case "item":
-                this.addItem(parseInt(s[1]),parseInt(s[2]));
-                break;
-            case "hp":
-                this.heal(parseInt(s[1]));
-                break;
-            case "spirit":
-                this.RecoverSpirit(parseInt(s[1]));
-                break;
-            default:
-                break;
-        }
-
-    },
-
-    //格式item,1000,1;confidence,1;hp,1之类的，用分号隔开
-    addRewards:function (str) {
-        //拆分
-        var strs = new Array();
-        if(str.indexOf(";")){
-            strs = str.split(";");
-        }else{
-            strs[0] = str;
-        }
-        //添加
-        var i;
-        for(i=0;i<strs.length;i++){
-            this.addReward(strs[i]);
-        }
-    },
-
+//*************************************判断资源数量************************************
 
     isOverWeight:function () {
         return this.weight > this.weightMax;
@@ -280,7 +368,7 @@ cc.Class({
     },
 
 
-
+//*************************************定义字典************************************
     Dictionary:function () {
         var items = {};
 
