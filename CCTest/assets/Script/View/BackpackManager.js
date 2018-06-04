@@ -170,31 +170,26 @@ cc.Class({
     },
 
     takeOffEquip:function () {
-        //从身上取下来，toDo
-        //角色更新属性，toDo
-        this.addItemInShow();
+        window.Player.takeOffEquip(this.itemInShow.id);
+        window.Player.initProperties();
+        this.updateShow();
     },
 
     putOnEquip:function () {
-        //穿到身上，toDo
-        //角色更新属性，toDo
-        this.useItemInShow();
+        window.Player.putOnEquip(this.itemInShow.id);
+        window.Player.initProperties();
+        this.updateShow();
     },
 
     useItem:function () {
-        //角色更新属性，toDo
+        window.Player.removeItem(this.itemInShow.id,1);
+        window.Player.changeProperties(this.itemInShow.effects);
         this.useItemInShow();
     },
 
     feedDog:function () {
         //更新狗属性，toDo
         this.useItemInShow();
-    },
-
-    addItemInShow:function(){
-        //这一句放到Player里
-        // window.Player.addItem(this.itemInShow.id,1);
-        this.updateShow();
     },
 
     useItemInShow:function () {

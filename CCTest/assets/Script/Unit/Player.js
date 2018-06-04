@@ -2,6 +2,22 @@
 cc.Class({
     extends: cc.Component,
 
+
+    //属性列表
+    /*
+    * 0 hp
+    * 1 hpMax
+    * 2 attack
+    * 3 basicAtk
+    * 4 defence
+    * 5 basicDef
+    * 6 speed
+    * 7 basicSpeed
+    * 8 spirit
+    * 9 food
+    * 10 water
+    * */
+
     properties: {
         //战斗属性：
         hp : 100,
@@ -13,18 +29,18 @@ cc.Class({
         speed:0.0,
         basicSpeed:1,
 
-        //熟练度
-        escapeProficiency:0,
-        meleeProficiency:0,
-        rangedProficiency:0,
-
-        //精力：影响探索
+        //精力：影响探索,精力、食物和水的上限都是100
         spirit : 100,
         food : 100,
         water : 100,
 
         //体质：影响生命上限、精力上限
         constitution:30,
+
+        //熟练度
+        escapeProficiency:0,
+        meleeProficiency:0,
+        rangedProficiency:0,
 
         //负重，超重会影响速度
         weightMax:100,
@@ -92,24 +108,28 @@ cc.Class({
         var equip = window.ReadJson.getItem(equipId);
         switch (equip.type){
             case 0:
+                if(this.weapon1 != 0)
+                    this.takeOffEquip(this.weapon1);
                 this.weapon1 = equip.id;
-                this.initProperties();
                 this.backpack.removeItem(equip.id,1);
                 break;
             case 1:
+                if(this.armor!=0)
+                    this.takeOffEquip(this.armor);
                 this.armor = equip.id;
-                this.initProperties();
                 this.backpack.removeItem(equip.id,1);
                 break;
             case 2:
+                if(this.shoes!=0)
+                    this.takeOffEquip(this.shoes);
                 this.shoes = equip.id;
-                this.initProperties();
                 this.backpack.removeItem(equip.id,1);
                 break;
             case 6:
             case 7:
+                if(this.weapon2!=0)
+                    this.takeOffEquip(this.weapon2);
                 this.weapon2 = equip.id;
-                this.initProperties();
                 this.backpack.removeItem(equip.id,1);
                 break;
             default:
@@ -125,42 +145,78 @@ cc.Class({
                 if (this.weapon1 != equipId) {
                     window.Tip.ShowTip("数据错误，请重试！");
                     return;
-                } else
+                } else{
                     this.weapon1 = 0;
+                    this.addItem(equipId,1);
+                }
                 break;
             case 1:
                 if (this.armor != equipId) {
                     window.Tip.ShowTip("数据错误，请重试！");
                     return;
-                } else
+                } else{
                     this.armor = 0;
+                    this.addItem(equipId,1);
+                }
                 break;
             case 2:
                 if (this.shoes != equipId) {
                     window.Tip.ShowTip("数据错误，请重试！");
                     return;
-                } else
+                } else{
                     this.shoes = 0;
+                    this.addItem(equipId,1);
+                }
                 break;
             case 6:
             case 7:
                 if (this.weapon2 != equipId) {
                     window.Tip.ShowTip("数据错误，请重试！");
                     return;
-                } else
+                } else{
                     this.weapon2 = 0;
+                    this.addItem(equipId,1);
+                }
                 break;
             default:
                 window.Tip.ShowTip("数据错误，请重试！");
                 break;
         }
-        this.initProperties();
     },
 
 
 
 
  //*************************************更新属性************************************
+
+    //格式 类型1|值1;类型2|值2
+    changeProperties:function (str,isFeedDog) {
+        var s = str.split(";");
+        for (let i = 0; i < s.length; i++) {
+            var ss = s[i].split("|");
+            if (isFeedDog) {
+                this.changeDogProperty(parseInt(ss[0]), parseInt(ss[1]));
+            } else {
+                this.changeProperty(parseInt(ss[0]), parseInt(ss[1]));
+            }
+        }
+    },
+
+    changeProperty:function (t,v) {
+        switch (t){
+            case 0:
+                this.heal(v);
+                break;
+        }
+    },
+
+    changeDogProperty:function (t,v) {
+        switch (t){
+            case 0:
+                this.heal(v);
+                break;
+        }
+    },
 
     //恢复生命
     heal:function (value) {
