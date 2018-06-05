@@ -389,8 +389,7 @@ cc.Class({
     Sleep:function(value){
 
         this.addMinutes(value*60);
-
-        this.ConsumeFoodAndWater(value);
+        //toDo 这里要根据升级的水平来提高回复量
         this.RecoverSpirit(value);
         this.HeadView.UpdateView();
     },
@@ -452,7 +451,6 @@ cc.Class({
 
     //添加物品
     addItems:function(dic){
-        var i;
         //遍历问题
         for(var i in dic){
             this.backpack.add(i,dic[i]);
@@ -540,6 +538,10 @@ cc.Class({
         if(this.backpack[itemId]<count)
             return false;
         return true;
+    },
+
+    maxActionTime:function(){
+        return Math.min(this.food-1,this.water-1);
     },
 
     updateWeight:function (value) {
