@@ -85,6 +85,84 @@ cc.Class({
         return backpackItems;
     },
 
+    getPropName:function (t) {
+        switch (t){
+            case 0:
+                return "生命";
+            case 1:
+                return "生命上限";
+            case 2:
+                return "攻击";
+            case 3:
+                return "基础攻击";
+            case 4:
+                return "防御";
+            case 5:
+                return "基础防御";
+            case 6:
+                return "速度";
+            case 7:
+                return "基础速度";
+            case 8:
+                return "精力";
+            case 9:
+                return "食物";
+            case 10:
+                return "水";
+            case 11:
+                return "体质";
+            case 12:
+                return "负重";
+            case 13:
+                return "负重上限";
+            case 14:
+                return "逃跑熟练度";
+            case 15:
+                return "搏斗熟练度";
+            case 16:
+                return "瞄准熟练度";
+            case 20:
+                return "自信";
+            case 21:
+                return "善良";
+            case 22:
+                return "聪明";
+            case 30:
+                return "钱";
+            case 31:
+                return "路途";
+            default:
+                return "";
+        }
+    },
 
+    //属性列表
+    /*
+    * 0 hp
+    * 1 hpMax
+    * 2 attack
+    * 3 basicAtk
+    * 4 defence
+    * 5 basicDef
+    * 6 speed
+    * 7 basicSpeed
+    * 8 spirit
+    * 9 food
+    * 10 water
+    * 11 constitution
+    * 12 weight
+    * 13 weightMax
+    * 14 escapeProficiency
+    * 15 meleeProficiency
+    * 16 rangedProficiency
+    *
+    * 20 confidence自信 自卑，自信，狂妄
+    * 21 kindness仁慈 凶残 残忍 淳朴 善良 老好人
+    * 22 cleverness聪明 愚蠢 笨拙 聪明 精明
+    *
+    * 30 money
+    * 31 distance
+    *
+    * */
 
 });

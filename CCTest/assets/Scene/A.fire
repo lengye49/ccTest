@@ -59,14 +59,14 @@
         "__id__": 3
       },
       {
-        "__id__": 387
+        "__id__": 388
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 397
+        "__id__": 398
       }
     ],
     "_prefab": null,
@@ -137,16 +137,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 386
-      },
-      {
-        "__id__": 394
+        "__id__": 387
       },
       {
         "__id__": 395
       },
       {
         "__id__": 396
+      },
+      {
+        "__id__": 397
       }
     ],
     "_prefab": null,
@@ -235,7 +235,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": -5000,
       "y": 0
     },
     "_skewX": 0,
@@ -13000,7 +13000,11 @@
     ],
     "_tag": -1,
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 386
+      }
+    ],
     "_prefab": null,
     "_id": "34LIiZHkhC5LOSeKS5dN7D",
     "_opacity": 255,
@@ -13028,7 +13032,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -5000,
+      "x": 0,
       "y": 0
     },
     "_skewX": 0,
@@ -15451,6 +15455,25 @@
     }
   },
   {
+    "__type__": "e4b5ahKt1RMcr5fUkgHZoF5",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 331
+    },
+    "_enabled": true,
+    "barbecueBtn": null,
+    "fabricateBtn": null,
+    "restTimeLabel": null,
+    "woodPile1Label": null,
+    "woodPile2Label": null,
+    "meatLabel": null,
+    "ironLabel": null,
+    "restTime": 8,
+    "barbecueCount": 1,
+    "fabricateCount": 1
+  },
+  {
     "__type__": "e9e40I59IZFkryOliM1rNSo",
     "_name": "",
     "_objFlags": 0,
@@ -15459,7 +15482,7 @@
     },
     "_enabled": true,
     "tipNode": {
-      "__id__": 387
+      "__id__": 388
     },
     "exploreNode": {
       "__id__": 201
@@ -15488,21 +15511,21 @@
     },
     "_children": [
       {
-        "__id__": 388
+        "__id__": 389
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 391
+        "__id__": 392
       },
       {
-        "__id__": 392
+        "__id__": 393
       }
     ],
     "_prefab": {
-      "__id__": 393
+      "__id__": 394
     },
     "_id": "f0V87mK0pFT5yXtuuBNyN/",
     "_opacity": 255,
@@ -15545,18 +15568,18 @@
     "_name": "Text",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 387
+      "__id__": 388
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 389
+        "__id__": 390
       }
     ],
     "_prefab": {
-      "__id__": 390
+      "__id__": 391
     },
     "_id": "29BYJmFUNMFIPzK+FST3qn",
     "_opacity": 255,
@@ -15599,7 +15622,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 388
+      "__id__": 389
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -15619,7 +15642,7 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 387
+      "__id__": 388
     },
     "asset": null,
     "fileId": "41uHyZKkpKgJ61+4YGzfHF",
@@ -15630,7 +15653,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 387
+      "__id__": 388
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -15656,18 +15679,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 387
+      "__id__": 388
     },
     "_enabled": true,
     "textLabel": {
-      "__id__": 389
+      "__id__": 390
     },
     "timePassed": 0
   },
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 387
+      "__id__": 388
     },
     "asset": null,
     "fileId": "1bt30qhPZHi5907Thw4C3G",
@@ -15689,15 +15712,15 @@
     "basicDef": 1,
     "speed": 0,
     "basicSpeed": 1,
-    "escapeProficiency": 0,
-    "meleeProficiency": 0,
-    "rangedProficiency": 0,
     "spirit": 100,
     "food": 100,
     "water": 100,
     "constitution": 30,
-    "weightMax": 100,
+    "escapeProficiency": 0,
+    "meleeProficiency": 0,
+    "rangedProficiency": 0,
     "weight": 0,
+    "weightMax": 100,
     "money": 0,
     "seasonNow": 0,
     "dayNow": 1,
@@ -15708,7 +15731,17 @@
     "weapon2": 0,
     "armor": 0,
     "shoes": 0,
-    "distance": 0
+    "distance": 0,
+    "confidence": 0,
+    "kindness": 0,
+    "cleverness": 0,
+    "dogHp": 0,
+    "dogHpMax": 0,
+    "dogAtk": 0,
+    "dogDef": 0,
+    "dogFood": 0,
+    "dogWater": 0,
+    "dogConstitution": 0
   },
   {
     "__type__": "709d7arqYdEfLTFoSVvfXV2",

@@ -25,6 +25,7 @@ cc.Class({
         window.Game = this;
 
         this.backpack = this.backpackNode.getComponent('BackpackManager');
+        this.rest = this.restNode.getComponent('RestManager');
         this.bottomView = this.bottomNode.getComponent('BottomView');
     },
 
@@ -88,6 +89,7 @@ cc.Class({
     openRest:function () {
         this.moveOut(this.exploreNode);
         this.moveIn(this.restNode);
+        this.rest.updateShow();
     },
 
     closeRest:function () {

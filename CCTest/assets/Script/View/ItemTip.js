@@ -21,17 +21,12 @@ cc.Class({
             this.itemName.string = item.name + "×" + count;
         else
             this.itemName.string = item.name;
-        this.effect.string = this.itemEffectString(item.effects);
+        this.effect.string = this.itemEffectsString(item.effects);
         this.desc.string = item.desc;
         this.itemType.string = this.itemTypeString(item.type);
         this.weight.string = item.weight * count + "kg";
 
         this.updateActions(item.type,isUsing)
-    },
-
-    //更新属性
-    itemEffectString:function (str) {
-        return "防御+5(需要子弹)";
     },
 
     updateActions:function (isShowAction1,str1,isShowAction2,str2) {
@@ -95,5 +90,20 @@ cc.Class({
                 return "杂物";
         }
     },
+
+    //更新属性,格式 类型1|值1;类型2|值2
+    itemEffectsString:function (str) {
+        var s = str.split(";");
+        var pros = "";
+        for (let i = 0; i < s.length; i++) {
+            var ss = s.split("|");
+            pros += window.ReadJson.getPropName(parseInt(ss[0]));
+            pros += " +"+ss[1];
+            if (i === (s.length - 1))
+                pros += "\n";
+        }
+        return pros;
+    },
+
 
 });

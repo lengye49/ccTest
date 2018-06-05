@@ -16,58 +16,89 @@ cc.Class({
     * 8 spirit
     * 9 food
     * 10 water
+    * 11 constitution
+    * 12 weight
+    * 13 weightMax
+    * 14 escapeProficiency
+    * 15 meleeProficiency
+    * 16 rangedProficiency
+    *
+    * 20 confidence自信 自卑，自信，狂妄
+    * 21 kindness仁慈 凶残 残忍 淳朴 善良 老好人
+    * 22 cleverness聪明 愚蠢 笨拙 聪明 精明
+    *
+    * 30 money
+    * 31 distance
+    *
+    * 100 dogHp
+    * 101 dogHpMax
+    * 102 dogAtk
+    * 104 dogDef
+    * 109 dogFood
+    * 110 dogWater
+    * 111 dogConstitution
     * */
 
     properties: {
         //战斗属性：
-        hp : 100,
-        hpMax : 100,
-        attack:10,
-        basicAtk:10,
-        defence:0,
-        basicDef:1,
-        speed:0.0,
-        basicSpeed:1,
+        hp: 100,
+        hpMax: 100,
+        attack: 10,
+        basicAtk: 10,
+        defence: 0,
+        basicDef: 1,
+        speed: 0.0,
+        basicSpeed: 1,
 
         //精力：影响探索,精力、食物和水的上限都是100
-        spirit : 100,
-        food : 100,
-        water : 100,
+        spirit: 100,
+        food: 100,
+        water: 100,
 
         //体质：影响生命上限、精力上限
-        constitution:30,
+        constitution: 30,
 
         //熟练度
-        escapeProficiency:0,
-        meleeProficiency:0,
-        rangedProficiency:0,
+        escapeProficiency: 0,
+        meleeProficiency: 0,
+        rangedProficiency: 0,
 
         //负重，超重会影响速度
-        weightMax:100,
-        weight:0,
+        weight: 0,
+        weightMax: 100,
 
         //金钱
-        money:0,
+        money: 0,
 
         //时间
-        seasonNow:0,
-        dayNow:1,
-        hourNow:0,
-        minuteNow:0,
-        minutesPassed:0,
+        seasonNow: 0,
+        dayNow: 1,
+        hourNow: 0,
+        minuteNow: 0,
+        minutesPassed: 0,
 
         //装备
-        weapon1 : 0,
-        weapon2 : 0,
-        armor : 0,
-        shoes : 0,
+        weapon1: 0,
+        weapon2: 0,
+        armor: 0,
+        shoes: 0,
 
         //行走距离
-        distance : 0,
+        distance: 0,
 
         //性格属性
+        confidence: 0,
+        kindness: 0,
+        cleverness: 0,
 
-
+        //狗属性
+        dogHp: 0,
+        dogHpMax: 0,
+        dogAtk: 0,
+        dogDef: 0,
+        dogFood: 0,
+        dogWater: 0,
+        dogConstitution: 0,
     },
 
     onLoad:function(){
@@ -184,9 +215,6 @@ cc.Class({
         }
     },
 
-
-
-
  //*************************************更新属性************************************
 
     //格式 类型1|值1;类型2|值2
@@ -203,9 +231,63 @@ cc.Class({
     },
 
     changeProperty:function (t,v) {
-        switch (t){
+        switch (t) {
             case 0:
                 this.heal(v);
+                break;
+            case 2:
+                this.attack += v;
+                break;
+            case 4:
+                this.defence += v;
+                break;
+            case 6:
+                this.speed += v;
+                break;
+            case 8:
+                this.RecoverSpirit(v);
+                break;
+            case 9:
+                this.addFood(v);
+                break;
+            case 10:
+                this.addWater(v);
+                break;
+            case 11:
+                this.constitution += v;
+                break;
+            case 12:
+                this.weight += v;
+                break;
+            case 13:
+                this.weightMax += v;
+                break;
+            case 14:
+                this.escapeProficiency += v;
+                break;
+            case 15:
+                this.meleeProficiency += v;
+                break;
+            case 16:
+                this.rangedProficiency += v;
+                break;
+            case 20:
+                this.confidence += v;
+                break;
+            case 21:
+                this.kindness += v;
+                break;
+            case 22:
+                this.cleverness += v;
+                break;
+            case 30:
+                this.money += v;
+                break;
+            case 31:
+                this.distance +=v;
+                break;
+            default:
+                console.log("错误的属性id = " + v);
                 break;
         }
     },
@@ -213,7 +295,16 @@ cc.Class({
     changeDogProperty:function (t,v) {
         switch (t){
             case 0:
-                this.heal(v);
+                this.healDog(v);
+                break;
+            case 9:
+                this.addDogFood(v);
+                break;
+            case 10:
+                this.addDogWater(v);
+                break;
+            default:
+                console.log("不可使用的狗属性 = " + v);
                 break;
         }
     },
@@ -222,6 +313,12 @@ cc.Class({
     heal:function (value) {
         var healValue = (value > this.hpMax - this.hp) ? (this.hpMax - this.hp) : (value);
         this.hp += healValue;
+        this.HeadView.UpdateView();
+    },
+
+    healDog:function (value) {
+        var healValue = (value > this.dogHpMax - this.dogHp) ? (this.dogHpMax - this.dogHp) : (value);
+        this.dogHp += healValue;
         this.HeadView.UpdateView();
     },
 
@@ -236,6 +333,16 @@ cc.Class({
             console.log("被打死！");
     },
 
+    damageDog:function (value) {
+        var damageValue = value>this.dogHp?this.dogHp:value;
+        this.dogHp-=damageValue;
+        this.HeadView.UpdateView();
+
+        //被打死
+        if(this.dogHp<=0)
+            console.log("狗被打死了！");
+    },
+
     //吃食物
     addFood:function (value) {
         var eatValue = (value > 100 - this.food) ? (100 - this.food) : value;
@@ -243,10 +350,22 @@ cc.Class({
         this.HeadView.UpdateView();
     },
 
+    addDogFood:function () {
+        var eatValue = (value > 100 - this.dogFood) ? (100 - this.dogFood) : value;
+        this.dogFood += eatValue;
+        this.HeadView.UpdateView();
+    },
+
     //喝水
     addWater:function(value){
         var drinkValue = (value > 100 - this.water) ? (100 - this.water) : value;
         this.water += drinkValue;
+        this.HeadView.UpdateView();
+    },
+
+    addDogWater:function (value) {
+        var drinkValue = (value > 100 - this.dogWater) ? (100 - this.dogWater) : value;
+        this.dogWater += drinkValue;
         this.HeadView.UpdateView();
     },
 
@@ -423,6 +542,10 @@ cc.Class({
         return true;
     },
 
+    updateWeight:function (value) {
+        this.weight = value;
+        this.HeadView.UpdateView();
+    },
 
 //*************************************定义字典************************************
     Dictionary:function () {

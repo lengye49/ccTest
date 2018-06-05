@@ -40,7 +40,7 @@ cc.Class({
             cellView.updateShow(itemId,num,this);
         }
         this.hidePool(i);
-        //更新totalWeight属性，toDo
+        window.Player.updateWeight(totalWeight);
         this.updateEquipedItems();
     },
 
@@ -183,18 +183,14 @@ cc.Class({
 
     useItem:function () {
         window.Player.removeItem(this.itemInShow.id,1);
-        window.Player.changeProperties(this.itemInShow.effects);
-        this.useItemInShow();
+        window.Player.changeProperties(this.itemInShow.effects,false);
+        this.updateShow();
     },
 
     feedDog:function () {
-        //更新狗属性，toDo
+        window.Player.removeItem(this.itemInShow.id,1);
+        window.Player.changeProperties(this.itemInShow.effects,true);
         this.useItemInShow();
-    },
-
-    useItemInShow:function () {
-        // window.Player.removeItem(this.itemInShow.id,1);
-        this.updateShow();
     },
 
 
