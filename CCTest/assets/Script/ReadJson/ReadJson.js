@@ -45,8 +45,9 @@ cc.Class({
                     item.price = res[i].price;
                     item.type = res[i].type;
                     item.effects = res[i].effects;
-                    item.ammo = res[i].ammo;//弹药种类 1箭2子弹
+                    item.ammo = res[i].ammo;//弹药id
                     item.canTier = res[i].canTier;
+                    item.distance = res[i].distance;
                     break;
                 }
             }

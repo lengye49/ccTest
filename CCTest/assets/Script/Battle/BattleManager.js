@@ -7,24 +7,32 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://www.cocos.com/docs/creator/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/life-cycle-callbacks/index.html
-
+var BattleAction = require("BattleActionState");
+var Unit = require("Unit");
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        weapon1Distance:cc.Label,
-        weapon2Distance:cc.Label,
-        weapon3Distance:cc.Label,
-        forwardDistance:cc.Label,
-        backwardDistance:cc.Label,
-        escapeRate:cc.Label,
+        // weapon1Distance:cc.Label,
+        // weapon2Distance:cc.Label,
+        // weapon3Distance:cc.Label,
+        // forwardDistance:cc.Label,
+        // backwardDistance:cc.Label,
+        // escapeRate:cc.Label,
+        //
+        // weapon1Action:cc.Button,
+        // weapon2Action:cc.Button,
+        // weapon3Action:cc.Button,
+        // jumpForward:cc.Button,
+        // jumpBackward:cc.Button,
+        // escapeBattle:cc.Button,
+        weapon1Action:BattleAction,
+        weapon2Action:BattleAction,
+        dogAction:BattleAction,
+        forwardAction:BattleAction,
+        backwardAction:BattleAction,
+        escapeAction:BattleAction,
 
-        weapon1Action:cc.Button,
-        weapon2Action:cc.Button,
-        weapon3Action:cc.Button,
-        jumpForward:cc.Button,
-        jumpBackward:cc.Button,
-        escapeBattle:cc.Button,
 
         enemyName:cc.Label,
         enemyHpProgress:cc.ProgressBar,
@@ -32,10 +40,11 @@ cc.Class({
 
         distanceLabel:cc.Label,
 
-        distance:100,
+        distance:100.0,
         rate:0.0,
         heroCD:0.0,
         enemyCD:0.0,
+        dogOn:false,
 
         //战斗时隐藏底部UI
         bottomUi:cc.Node,
@@ -43,7 +52,7 @@ cc.Class({
 
     onLoad:function(){
         this.BattleLog = this.node.getChildByName("battleLog").getComponent("BattleLog");
-        var Unit = require("Unit");
+
         this.enemy = new Unit();
     },
 
@@ -80,8 +89,99 @@ cc.Class({
         this.CheckTurn();
     },
 
-    //处理场景元素
+    //************************处理场景元素************************
+    initBattleAction:function() {
+        var nameStr;
+
+        var weaponId = window.Player.weapon1;
+        if (weaponId != 0) {
+            this.weapon1 = window.ReadJson.getItem(weaponId);
+            nameStr = this.weapon1.name;
+            // stateStr = this.weapon1.distance + "米";
+        }else{
+            nameStr = "拳头";
+            // stateStr = "1米";
+        }
+        this.weapon1Action.initState(nameStr);
+
+        weaponId = window.Player.weapon2;
+        if(weaponId != 0){
+            this.weapon2 = window.ReadJson.getItem(weaponId);
+            nameStr = this.weapon2.name;
+            // stateStr = this.weapon2.distance + "米";
+        }else{
+            nameStr = "拳头";
+            // stateStr = "1米";
+        }
+        this.weapon2Action.initState(nameStr);
+
+        if(window.Player.hasDog){
+            nameStr = window.Player.dogName;
+        }else{
+            nameStr = "无";
+        }
+        this.dogAction.initState(nameStr);
+        this.forwardAction.initState("前跳");
+        this.backwardAction.initState("后跃");
+        this.escapeAction.initState("逃跑");
+    },
+
+    updateBattleAction:function() {
+        var isOn = true;
+        var stateStr = "";
+
+        if (this.weapon1 != undefined) {
+            stateStr = this.weapon1.distance + "米";
+            isOn = (this.distance <= this.weapon1.distance);
+        } else {
+            stateStr = "1米";
+            isOn = (this.distance <= 1);
+        }
+        this.weapon1Action.updateState(stateStr, isOn);
+
+        if (this.weapon2 != undefined) {
+            if (window.Player.isItemEnough(this.weapon2.ammo, 1)) {
+                stateStr = this.weapon2.distance + "米";
+                isOn = (this.distance <= this.weapon1.distance);
+            } else {
+                stateStr = "缺少弹药";
+                isOn = false;
+            }
+        } else {
+            stateStr = "1米";
+            isOn = (this.distance <= 1);
+        }
+        this.weapon2Action.updateState(stateStr, isOn);
+
+
+
+
+
+
+
+
+    },
+
+
+    //reOpenBattleActions(){},
+
+    stopBattleActions:function(){
+        this.weapon1Action.stop();
+        this.weapon2Action.stop();
+        this.dogAction.stop();
+        this.forwardAction.stop();
+        this.backwardAction.stop();
+        this.escapeAction.stop();
+    },
+
+
+    //按钮
     UpdateActionState:function (IsOn) {
+        if(window.Player.weapon1>0){
+            this.weapon1Action.interactable = IsOn;
+
+        }
+
         this.weapon1Action.interactable = IsOn;
         this.weapon2Action.interactable = IsOn;
         this.weapon3Action.interactable = IsOn;
@@ -89,6 +189,8 @@ cc.Class({
         this.jumpBackward.interactable = IsOn;
         this.escapeBattle.interactable = IsOn;
     },
+
+
 
     UpdateActionLabel:function(){
         this.weapon1Distance.string = "0";

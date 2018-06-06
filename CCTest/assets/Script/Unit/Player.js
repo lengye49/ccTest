@@ -92,6 +92,8 @@ cc.Class({
         cleverness: 0,
 
         //狗属性
+        hasDog:false,
+        dogName:"大黄",
         dogHp: 0,
         dogHpMax: 0,
         dogAtk: 0,
