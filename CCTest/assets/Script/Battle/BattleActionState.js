@@ -20,5 +20,9 @@ cc.Class({
 
     stop:function () {
         this.btn.interactable = false;
-    }
+    },
+
+    continue:function () {
+        this.btn.interactable = true;
+    },
 });

@@ -45,7 +45,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": false
+    "autoReleaseAssets": null
   },
   {
     "__type__": "cc.Node",
@@ -12924,42 +12924,16 @@
       "__id__": 260
     },
     "_enabled": true,
-    "weapon1Distance": {
-      "__id__": 265
-    },
-    "weapon2Distance": {
-      "__id__": 272
-    },
-    "weapon3Distance": {
-      "__id__": 279
-    },
-    "forwardDistance": {
-      "__id__": 286
-    },
-    "backwardDistance": {
-      "__id__": 293
-    },
-    "escapeRate": {
-      "__id__": 300
-    },
     "weapon1Action": {
       "__id__": 267
     },
     "weapon2Action": {
       "__id__": 274
     },
-    "weapon3Action": {
-      "__id__": 281
-    },
-    "jumpForward": {
-      "__id__": 288
-    },
-    "jumpBackward": {
-      "__id__": 295
-    },
-    "escapeBattle": {
-      "__id__": 302
-    },
+    "dogAction": null,
+    "forwardAction": null,
+    "backwardAction": null,
+    "escapeAction": null,
     "enemyName": {
       "__id__": 320
     },
@@ -12976,6 +12950,7 @@
     "rate": 0,
     "heroCD": 0,
     "enemyCD": 0,
+    "dogState": "准备",
     "bottomUi": {
       "__id__": 145
     }
@@ -16189,6 +16164,8 @@
     "confidence": 0,
     "kindness": 0,
     "cleverness": 0,
+    "hasDog": false,
+    "dogName": "大黄",
     "dogHp": 0,
     "dogHpMax": 0,
     "dogAtk": 0,

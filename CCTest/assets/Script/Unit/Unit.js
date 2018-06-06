@@ -15,6 +15,7 @@ cc.Class({
         hp:100,
         hpMax:100,
         speed:5.0,
+        attackDistance:1,
     },
 
 

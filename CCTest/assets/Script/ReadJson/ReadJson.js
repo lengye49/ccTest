@@ -48,6 +48,7 @@ cc.Class({
                     item.ammo = res[i].ammo;//弹药id
                     item.canTier = res[i].canTier;
                     item.distance = res[i].distance;
+                    item.cd = res[i].cd;
                     break;
                 }
             }

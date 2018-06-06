@@ -13,19 +13,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // weapon1Distance:cc.Label,
-        // weapon2Distance:cc.Label,
-        // weapon3Distance:cc.Label,
-        // forwardDistance:cc.Label,
-        // backwardDistance:cc.Label,
-        // escapeRate:cc.Label,
-        //
-        // weapon1Action:cc.Button,
-        // weapon2Action:cc.Button,
-        // weapon3Action:cc.Button,
-        // jumpForward:cc.Button,
-        // jumpBackward:cc.Button,
-        // escapeBattle:cc.Button,
         weapon1Action:BattleAction,
         weapon2Action:BattleAction,
         dogAction:BattleAction,
@@ -33,18 +20,16 @@ cc.Class({
         backwardAction:BattleAction,
         escapeAction:BattleAction,
 
-
         enemyName:cc.Label,
         enemyHpProgress:cc.ProgressBar,
         enemyHpLabel:cc.Label,
-
         distanceLabel:cc.Label,
 
         distance:100.0,
         rate:0.0,
         heroCD:0.0,
         enemyCD:0.0,
-        dogOn:false,
+        dogState:"准备",
 
         //战斗时隐藏底部UI
         bottomUi:cc.Node,
@@ -52,7 +37,6 @@ cc.Class({
 
     onLoad:function(){
         this.BattleLog = this.node.getChildByName("battleLog").getComponent("BattleLog");
-
         this.enemy = new Unit();
     },
 
@@ -80,8 +64,6 @@ cc.Class({
         this.bottomUi.active = true;
     },
 
-
-
     initBattle:function () {
         this.UpdateActionLabel();
         this.UpdateEnemyState();
@@ -89,7 +71,7 @@ cc.Class({
         this.CheckTurn();
     },
 
-    //************************处理场景元素************************
+    //************************交互UI************************
     initBattleAction:function() {
         var nameStr;
 
@@ -153,19 +135,21 @@ cc.Class({
         }
         this.weapon2Action.updateState(stateStr, isOn);
 
+        if(window.Player.hasDog || this.dogState === "准备"){
+            isOn=true;
+        }else
+            isOn=false;
+        this.dogAction.updateState(this.dogState,isOn);
 
+        stateStr = window.Player.speed * 5 +"米";
+        this.forwardAction.updateState(stateStr,true);
+        this.backwardAction.updateState(stateStr,true);
 
-
-
-
-
-
+        //toDo 计算逃跑概率
+        this.escapeAction.updateState("50%",true);
     },
 
-
-    //reOpenBattleActions(){},
-
-    stopBattleActions:function(){
+    pauseBattleActions:function(){
         this.weapon1Action.stop();
         this.weapon2Action.stop();
         this.dogAction.stop();
@@ -175,37 +159,11 @@ cc.Class({
     },
 
 
-    //按钮
-    UpdateActionState:function (IsOn) {
-        if(window.Player.weapon1>0){
-            this.weapon1Action.interactable = IsOn;
-
-        }
-
-        this.weapon1Action.interactable = IsOn;
-        this.weapon2Action.interactable = IsOn;
-        this.weapon3Action.interactable = IsOn;
-        this.jumpForward.interactable = IsOn;
-        this.jumpBackward.interactable = IsOn;
-        this.escapeBattle.interactable = IsOn;
-    },
-
-
-
-    UpdateActionLabel:function(){
-        this.weapon1Distance.string = "0";
-        this.weapon2Distance.string = "0";
-        this.weapon3Distance.string = "0";
-        this.forwardDistance.string = "0";
-        this.backwardDistance.string = "0";
-        this.escapeRate.string = "0";
-    },
-
+    //************************敌人状态显示************************
     UpdateEnemyState:function () {
         this.enemyName.string = this.enemy.Name;
-        this.enemyHpProgress.progress = 1.0;
+        this.enemyHpProgress.progress = this.enemy.hp/this.enemy.hpMax;
         this.enemyHpLabel.string = this.enemy.hp + "/" + this.enemy.hpMax;
-
     },
 
     UpdateDistance:function () {
@@ -213,22 +171,19 @@ cc.Class({
     },
 
 
-
-    //判断攻击顺序
+    //************************判断攻击顺序************************
     CheckTurn:function(){
-        if(this.heroCD<=this.enemyCD)
+        if(this.heroCD <= this.enemyCD)
             this.PlayerTurn();
         else
             this.EnemyTurn();
     },
 
-
-
-    //敌方行动
+    //************************敌人行动************************
     EnemyTurn:function () {
-        this.UpdateActionState(false);
+        this.pauseBattleActions();
 
-        if(enemy.attackDistance>this.distance)
+        if(this.enemy.attackDistance>this.distance)
             this.EnemyMoveForward();
         else
             this.EnemyAttack();
@@ -262,11 +217,9 @@ cc.Class({
         this.checkGameOver();
     },
 
-
-
-    //玩家行动
+    //************************玩家行动************************
     PlayerTurn:function () {
-        this.UpdateActionState(true);
+        this.UpdateActionState();
     },
 
     Weapon1Attack:function () {
@@ -338,7 +291,7 @@ cc.Class({
 
 
 
-    //通用计算
+    //************************敌人行动************************
     CalHit:function () {
         return true;
     },
@@ -356,7 +309,7 @@ cc.Class({
 
 
 
-    //检测战斗结束
+    //************************检测战斗结果************************
     checkGameOver:function () {
        if(this.enemy.hp>0)
            return;
