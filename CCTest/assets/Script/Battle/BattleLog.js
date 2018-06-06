@@ -15,13 +15,10 @@ cc.Class({
         battleLogs:[cc.Label],
     },
 
-
-
-    start:function () {
+    initLogs:function(){
         this.battleLogs.forEach(function(i,index){
-            i.string = "forEach循环，循环数组中每一个元素并采取操作，可以不用知道数组长度";
+            i.string = "";
         })
-        this.addLog("去你大爷的！");
     },
 
     addLog:function (str) {

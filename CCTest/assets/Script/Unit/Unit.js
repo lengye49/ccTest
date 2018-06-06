@@ -16,6 +16,10 @@ cc.Class({
         hpMax:100,
         speed:5.0,
         attackDistance:1,
+        hit:50,
+        crit:5,
+        cd:3.0,
+        actionName:"开了一枪",
     },
 
 

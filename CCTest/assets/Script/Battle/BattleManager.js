@@ -31,7 +31,6 @@ cc.Class({
         enemyCD:0.0,
         dogState:"准备",
 
-        //战斗时隐藏底部UI
         bottomUi:cc.Node,
     },
 
@@ -46,9 +45,12 @@ cc.Class({
         this.NextPanel = nextPanel;
         this.bottomUi.active = false;
 
+        this.BattleLog.initLogs();
         this.node.position = cc.p(0,0);
-        //根据id生成敌人
+
         this.enemyIds = enemyIds;
+        this.enemyIndex = 0;
+        this.getEnemy();
 
         this.initBattle();
     },
@@ -65,9 +67,11 @@ cc.Class({
     },
 
     initBattle:function () {
-        this.UpdateActionLabel();
+        this.initBattleAction();
+
         this.UpdateEnemyState();
         this.UpdateDistance();
+
         this.CheckTurn();
     },
 
@@ -161,7 +165,7 @@ cc.Class({
 
     //************************敌人状态显示************************
     UpdateEnemyState:function () {
-        this.enemyName.string = this.enemy.Name;
+        this.enemyName.string = this.enemy.name;
         this.enemyHpProgress.progress = this.enemy.hp/this.enemy.hpMax;
         this.enemyHpLabel.string = this.enemy.hp + "/" + this.enemy.hpMax;
     },
@@ -190,20 +194,20 @@ cc.Class({
     },
 
     EnemyAttack:function () {
-        this.BattleLog.add("-->" +this.enemy.Name + "朝你开了一枪。");
-        if(!this.CalHit())
+        this.BattleLog.add("-->" +this.enemy.name + "朝你"+this.enemy.actionName+"。");
+        if(!this.CalHit(this.enemy.hit))
             this.BattleLog.add("-->"+"但是很幸运，你躲过了。");
         else
         {
-            var dmg = this.CalDamage(this.enemy.attack,window.Player.defence,this.CalCrit());
+            var dmg = this.CalDamage(this.enemy.attack,window.Player.defence,this.CalCrit(this.enemy.crit));
             window.Player.damage(dmg);
         }
-        this.enemyCD+=1;
+        this.enemyCD += this.enemy.cd;
     },
 
     EnemyMoveForward:function () {
         var d = this.enemy.speed <= this.distance ? this.enemy.speed : this.distance;
-        this.BattleLog.add("-->" + this.enemy.Name + "向你靠近了" + d + "米。");
+        this.BattleLog.add("-->" + this.enemy.name + "向你靠近了" + d + "米。");
         this.distance -= d;
         this.UpdateDistance();
         this.enemyCD += 1;
@@ -213,13 +217,12 @@ cc.Class({
         var dmg = value > this.enemy.hp ? this.enemy.hp : value;
         this.enemy.hp -= dmg;
         this.UpdateEnemyState();
-
         this.checkGameOver();
     },
 
     //************************玩家行动************************
     PlayerTurn:function () {
-        this.UpdateActionState();
+        this.updateBattleAction();
     },
 
     Weapon1Attack:function () {
@@ -291,13 +294,15 @@ cc.Class({
 
 
 
-    //************************敌人行动************************
-    CalHit:function () {
-        return true;
+    //************************通用计算************************
+    CalHit:function (hit) {
+        var rnd = Math.random() * 100;
+        return rnd < hit;
     },
 
-    CalCrit:function () {
-        return false;
+    CalCrit:function (crit) {
+        var rnd = Math.random() * 100;
+        return rnd < crit;
     },
 
     CalDamage:function(att,def,isCrit) {
@@ -307,19 +312,25 @@ cc.Class({
         return dmg;
     },
 
-
-
     //************************检测战斗结果************************
     checkGameOver:function () {
-       if(this.enemy.hp>0)
-           return;
-       console.log("你打死了一个敌人");
-       if(this.enemyIds.length>0)
-           console.log("下一个敌人出现了！");
-       else
-           this.leaveBattle();
-
+        if (this.enemy.hp > 0)
+            return;
+        this.BattleLog.add("-->你击败了" + this.enemy.name + "。");
+        if (this.enemyIndex < this.enemyIds.length) {
+            this.getEnemy();
+            this.initBattle();
+        }
+        else {
+            this.leaveBattle();
+        }
     },
+
+    getEnemy:function (index) {
+        this.enemy = window.ReadJson.getNPC(this.enemyIds[this.enemyIndex]);
+        this.BattleLog.add("-->你发现了" + this.enemy.name + "。");
+        this.enemyIndex++;
+    }
 
 
 });

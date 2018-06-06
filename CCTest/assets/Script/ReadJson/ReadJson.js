@@ -67,6 +67,14 @@ cc.Class({
                     npc.id = npcId;
                     npc.name = res[i].name;
                     npc.desc = res[i].desc;
+                    npc.hp = res[i].hp;
+                    npc.hpMax = res[i].hpMax;
+                    npc.speed = res[i].speed;
+                    npc.attackDistance = res[i].attackDistance;
+                    npc.hit = res[i].hit;
+                    npc.crit = res[i].crit;
+                    npc.cd = res[i].cd;
+                    npc.actionName = res[i].actionName;
                     break;
                 }
             }
