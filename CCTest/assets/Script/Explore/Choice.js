@@ -114,7 +114,7 @@ cc.Class({
             case 1:
                 var ids = new Array();
                 ids[0] = parseInt(s[2]);
-                window.Battle.startBattle(ids, this.node, undefined);
+                window.Battle.startBattle(ids, this.node);
                 break;
             case 2:
                 var itemId = parseInt(s[2]);

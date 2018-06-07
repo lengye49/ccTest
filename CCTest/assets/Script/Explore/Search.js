@@ -30,7 +30,7 @@ cc.Class({
 
         //检测是否遇到怪物
         if (false) {
-            window.Battle.startBattle(0,this.node,this.node);
+            window.Battle.startBattle(0,this.node);
         } else {
             var dis = window.Player.speed * 3600 ;
             window.Player.addDistance(dis);
@@ -51,7 +51,7 @@ cc.Class({
 
         window.Player.addMinutes(60);
         if (false) {
-            window.Battle.startBattle(0, this.node, this.node);
+            window.Battle.startBattle(0, this.node);
         } else {
             var dis = window.Player.speed * 3600/4;
             window.Player.addDistance(dis);

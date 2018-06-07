@@ -23,7 +23,7 @@ cc.Class({
     * 15 meleeProficiency
     * 16 rangedProficiency
     *
-    * 20 confidence自信 自卑，自信，狂妄
+    * 20 confidence自信 自卑，懵懂，自信，狂妄
     * 21 kindness仁慈 凶残 残忍 淳朴 善良 老好人
     * 22 cleverness聪明 愚蠢 笨拙 聪明 精明
     *
@@ -49,6 +49,15 @@ cc.Class({
         basicDef: 1,
         speed: 0.0,
         basicSpeed: 1,
+
+        weapon1Atk:100,
+        weapon2Atk:500,
+        weapon1Hit:80,
+        weapon2Hit:50,
+        weapon1Crit:60,
+        weapon2Crit:50,
+        weapon1CD:0.1,
+        weapon2CD:0.2,
 
         //精力：影响探索,精力、食物和水的上限都是100
         spirit: 100,
@@ -98,6 +107,8 @@ cc.Class({
         dogHpMax: 0,
         dogAtk: 0,
         dogDef: 0,
+        dogHit:50,
+        dogCD:5,
         dogFood: 0,
         dogWater: 0,
         dogConstitution: 0,
@@ -616,6 +627,11 @@ cc.Class({
         this.clear = function () {
             items = {};
         };
+    },
+
+    //toDo getDog, DogDie
+    dogDie:function () {
+
     },
 
 });

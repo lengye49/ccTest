@@ -47,6 +47,7 @@ cc.Class({
                     item.effects = res[i].effects;
                     item.ammo = res[i].ammo;//弹药id
                     item.canTier = res[i].canTier;
+                    item.attack = res[i].attack;
                     item.distance = res[i].distance;
                     item.cd = res[i].cd;
                     break;
@@ -75,6 +76,7 @@ cc.Class({
                     npc.crit = res[i].crit;
                     npc.cd = res[i].cd;
                     npc.actionName = res[i].actionName;
+                    npc.killReward = rea[i].killReward;
                     break;
                 }
             }
@@ -146,33 +148,5 @@ cc.Class({
         }
     },
 
-    //属性列表
-    /*
-    * 0 hp
-    * 1 hpMax
-    * 2 attack
-    * 3 basicAtk
-    * 4 defence
-    * 5 basicDef
-    * 6 speed
-    * 7 basicSpeed
-    * 8 spirit
-    * 9 food
-    * 10 water
-    * 11 constitution
-    * 12 weight
-    * 13 weightMax
-    * 14 escapeProficiency
-    * 15 meleeProficiency
-    * 16 rangedProficiency
-    *
-    * 20 confidence自信 自卑，自信，狂妄
-    * 21 kindness仁慈 凶残 残忍 淳朴 善良 老好人
-    * 22 cleverness聪明 愚蠢 笨拙 聪明 精明
-    *
-    * 30 money
-    * 31 distance
-    *
-    * */
 
 });
