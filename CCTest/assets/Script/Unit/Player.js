@@ -8,9 +8,7 @@ cc.Class({
     * 0 hp
     * 1 hpMax
     * 2 attack
-    * 3 basicAtk
     * 4 defence
-    * 5 basicDef
     * 6 speed
     * 7 basicSpeed
     * 8 spirit
@@ -22,6 +20,9 @@ cc.Class({
     * 14 escapeProficiency
     * 15 meleeProficiency
     * 16 rangedProficiency
+    * 17 hit
+    * 18 crit
+    * 19 cd
     *
     * 20 confidence自信 自卑，懵懂，自信，狂妄
     * 21 kindness仁慈 凶残 残忍 淳朴 善良 老好人
@@ -44,11 +45,12 @@ cc.Class({
         hp: 100,
         hpMax: 100,
         attack: 10,
-        basicAtk: 10,
         defence: 0,
-        basicDef: 1,
         speed: 0.0,
-        basicSpeed: 1,
+        basicSpeed: 1.0,
+        hit:0,
+        crit:0,
+        cd:0.0,
 
         weapon1Atk:100,
         weapon2Atk:500,
@@ -58,6 +60,9 @@ cc.Class({
         weapon2Crit:50,
         weapon1CD:0.1,
         weapon2CD:0.2,
+        weapon1Distance:1.0,
+        weapon2Distance:10.0,
+
 
         //精力：影响探索,精力、食物和水的上限都是100
         spirit: 100,
@@ -112,6 +117,7 @@ cc.Class({
         dogFood: 0,
         dogWater: 0,
         dogConstitution: 0,
+        dogType:0,//0拉巴拉多，1泰迪，2藏獒，3哈士奇
     },
 
     onLoad:function(){
@@ -119,7 +125,8 @@ cc.Class({
 
     },
 
-    //根据数据重新配置
+    //需要提供的角色数据：hp,constitution,spirit,food,water,weapon1,weapon2,armor,shoes,confidence,kindness,cleverness
+    //需要提供的宠物数据：hasDog,dogName,
     SetPlayerData :function(str) {
         var strs = str.split(";");
         this.day = parseInt(strs[0]);
@@ -145,7 +152,90 @@ cc.Class({
 
 //*************************************更新基础属性************************************
     initProperties:function () {
+        this.hpMax = 50+this.constitution * 2;
+        this.attack =  this.constitution;
+        this.defence = 0;
+        this.readWeapon1();
+        this.readWeapon2();
+        this.readArmor();
+        this.readShoes();
+    },
 
+    readWeapon1:function(){
+        if(this.weapon1>0){
+            var effects = window.ReadJson.getItem(this.weapon1).effects;
+            var s = effects.split(";");
+            for(let i=0;i<s.length;i++){
+                var ss = s[i].split("|");
+                if(i===0)
+                    this.weapon1Atk = this.attack + parseInt(ss[1]);
+                else if(i===1)
+                    this.weapon1Hit = parseInt(ss[1]) * (1+this.meleeProficiency/100);
+                else if(i===2)
+                    this.weapon1Crit = parseInt(ss[1]) * (1+this.meleeProficiency/100);
+                else if(i===3)
+                    this.weapon1CD = parseFloat(ss[1])/(1+this.meleeProficiency/100);
+                else if(i===4)
+                    this.weapon1Distance = parseFloat(ss[1]);
+            }
+        }else{
+            this.weapon1Atk = this.attack;
+            this.weapon1Hit = 80 * (1+this.meleeProficiency/100);
+            this.weapon1Crit = 10 * (1+this.meleeProficiency/100);
+            this.weapon1CD = 1.0/(1+this.meleeProficiency/100);
+            this.weapon1Distance = 0.5;
+        }
+    },
+
+    //枪械不受体质加成
+    readWeapon2:function() {
+        if (this.weapon2 > 0) {
+            var equip = window.ReadJson.getItem(this.weapon2);
+            var effects = equip.effects;
+            var s = effects.split(";");
+            for (let i = 0; i < s.length; i++) {
+                var ss = s[i].split("|");
+                if (i === 0) {
+                    if (equip.type === 6)
+                        this.weapon2Atk = this.attack + parseInt(ss[1]);
+                    else
+                        this.weapon2Atk = parseInt(ss[1]);
+                }
+                else if (i === 1)
+                    this.weapon2Hit = parseInt(ss[1]) * (1 + this.rangedProficiency / 100);
+                else if (i === 2)
+                    this.weapon2Crit = parseInt(ss[1]) * (1 + this.rangedProficiency / 100);
+                else if (i === 3)
+                    this.weapon2CD = parseFloat(ss[1]) / (1 + this.rangedProficiency / 100);
+                else if (i === 4)
+                    this.weapon2Distance = parseFloat(ss[1]);
+            }
+        } else {
+            this.weapon1Atk = this.attack;
+            this.weapon1Hit = 80 * (1 + this.meleeProficiency / 100);
+            this.weapon1Crit = 10 * (1 + this.meleeProficiency / 100);
+            this.weapon1CD = 1.0 / (1 + this.meleeProficiency / 100);
+            this.weapon1Distance = 0.5;
+        }
+    },
+
+    readArmor:function(){
+        if(this.armor>0){
+            var effects = window.ReadJson.getItem(this.armor).effects;
+            var ss= effects.split("|");
+            this.armor = parseInt(ss[1]);
+        }else {
+            this.armor = 0;
+        }
+    },
+
+    readShoes:function(){
+        this.speed =this.basicSpeed + this.constitution*0.02
+        if(this.shoes>0){
+            var effects = window.ReadJson.getItem(this.shoes).effects;
+            var ss= effects.split("|");
+            this.speed *= (1 + parseInt(ss[1])/100);
+        }
     },
 
     putOnEquip:function (equipId) {

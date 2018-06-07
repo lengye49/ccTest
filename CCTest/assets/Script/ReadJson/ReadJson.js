@@ -44,12 +44,12 @@ cc.Class({
                     item.desc = res[i].desc;
                     item.price = res[i].price;
                     item.type = res[i].type;
-                    item.effects = res[i].effects;
+                    item.effects = res[i].effects;//武器 攻击|命中|暴击|间隔|距离，衣服：防御，鞋子：速度
                     item.ammo = res[i].ammo;//弹药id
                     item.canTier = res[i].canTier;
-                    item.attack = res[i].attack;
-                    item.distance = res[i].distance;
-                    item.cd = res[i].cd;
+                    item.attack = res[i].attack;//注掉
+                    item.distance = res[i].distance;//注掉
+                    item.cd = res[i].cd;//注掉
                     break;
                 }
             }
@@ -112,7 +112,7 @@ cc.Class({
             case 5:
                 return "基础防御";
             case 6:
-                return "速度";
+                return "速度";//应该是百分数
             case 7:
                 return "基础速度";
             case 8:
@@ -133,6 +133,12 @@ cc.Class({
                 return "搏斗熟练度";
             case 16:
                 return "瞄准熟练度";
+            case 17:
+                return "命中率";
+            case 18:
+                return "暴击率";
+            case 19:
+                return "攻击间隔";
             case 20:
                 return "自信";
             case 21:
@@ -148,5 +154,18 @@ cc.Class({
         }
     },
 
+
+    //toDo 不同种类的狗成长不同
+    getDogAtkInc:function (dogType) {
+      return 1;
+    },
+
+    getDogHpInc:function (dogType) {
+      return 1;
+    },
+
+    getDogFindProp:function (dogType) {
+      return 0.5;
+    },
 
 });
