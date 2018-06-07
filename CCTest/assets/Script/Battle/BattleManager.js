@@ -214,36 +214,36 @@ cc.Class({
     },
 
     EnemyAtkHero:function () {
-        this.BattleLog.add("-->" +this.enemy.name + "朝你"+this.enemy.actionName+"。");
+        this.BattleLog.add("-->" +this.enemy.name + "朝你"+this.enemy.actionName+"。",color.RED);
         if(!this.CalHit(this.enemy.hit))
-            this.BattleLog.add("-->"+"但是很幸运，你躲过了。");
+            this.BattleLog.add("-->"+"但是很幸运，你躲过了。",color.BLACK);
         else
         {
             var dmg = this.CalDamage(this.enemy.attack,window.Player.defence,this.CalCrit(this.enemy.crit));
             window.Player.damage(dmg);
-            this.BattleLog.add("-->"+"你受到了"+dmg+"点伤害。");
+            this.BattleLog.add("-->"+"你受到了"+dmg+"点伤害。",color.RED);
         }
     },
 
     EnemyAtkDog:function () {
-        this.BattleLog.add("-->" +this.enemy.name + "朝"+window.Player.dogName+this.enemy.actionName+"。");
+        this.BattleLog.add("-->" +this.enemy.name + "朝"+window.Player.dogName+this.enemy.actionName+"。",color.RED);
         if(!this.CalHit(this.enemy.hit))
-            this.BattleLog.add("-->"+"但是很幸运，"+window.Player.dogName+"躲过了。");
+            this.BattleLog.add("-->"+"但是很幸运，"+window.Player.dogName+"躲过了。",color.GREEN);
         else
         {
             var dmg = this.CalDamage(this.enemy.attack,window.Player.dogDef,this.CalCrit(this.enemy.crit));
             window.Player.damageDog(dmg);
-            this.BattleLog.add("-->"+window.Player.dogName+"受到了"+dmg+"点伤害。");
+            this.BattleLog.add("-->"+window.Player.dogName+"受到了"+dmg+"点伤害。",color.RED);
             if(window.Player.dogHp < window.Player.dogHpMax){
                 this.dogState="准备";
-                this.BattleLog.add("-->"+window.Player.dogName+"被重伤，躲起来了。");
+                this.BattleLog.add("-->"+window.Player.dogName+"被重伤，躲起来了。",color.RED);
             }
         }
     },
 
     EnemyMoveForward:function () {
         var d = this.enemy.speed <= this.distance ? this.enemy.speed : this.distance;
-        this.BattleLog.add("-->" + this.enemy.name + "向你靠近了" + d + "米。");
+        this.BattleLog.add("-->" + this.enemy.name + "向你靠近了" + d + "米。",color.BLACK);
         this.distance -= d;
         this.UpdateDistance();
         this.enemyCD += 1;
@@ -252,6 +252,7 @@ cc.Class({
     EnemyLoseHp:function(value) {
         var dmg = value > this.enemy.hp ? this.enemy.hp : value;
         this.enemy.hp -= dmg;
+        this.BattleLog.add("-->造成"+dmg+"点伤害",color.BLACK);
         this.UpdateEnemyState();
         this.checkGameOver();
     },
@@ -263,7 +264,7 @@ cc.Class({
 
     Weapon1Attack:function () {
         if (!this.CalHit(window.Player.weapon1Hit)) {
-            this.BattleLog.add("-->没有打中!");
+            this.BattleLog.add("-->没有打中!",color.BLACK);
             return;
         } else {
             var dmg = this.CalDamage(window.Player.weapon1Atk, this.enemy.defence, this.CalCrit(window.Player.weapon1Crit));
@@ -276,7 +277,7 @@ cc.Class({
 
     Weapon2Attack:function () {
         if (!this.CalHit(window.Player.weapon2Hit)) {
-            this.BattleLog.add("-->没有打中!");
+            this.BattleLog.add("-->没有打中!",color.BLACK);
             return;
         } else {
             var dmg = this.CalDamage(window.Player.weapon2Atk, this.enemy.defence, this.CalCrit(window.Player.weapon2Crit));
@@ -293,8 +294,9 @@ cc.Class({
     },
 
     DogAttack:function () {
+        this.BattleLog.add("-->"+window.Player.dogName+"向"+this.enemy.name+"咬去，",color.BLACK);
         if (!this.CalHit(window.Player.dogHit)) {
-            this.BattleLog.add("-->" + window.Player.dogName + "攻击" + this.enemy.name + "，但被躲开了!");
+            this.BattleLog.add("-->但被躲开了!",color.BLACK);
             return;
         } else {
             var dmg = this.CalDamage(window.Player.dogAtk, this.enemy.defence, false);
@@ -308,7 +310,7 @@ cc.Class({
     JumpForward:function () {
         var d = window.Player.speed * 5;
         var d = (d <= this.distance ? d : this.distance);
-        this.BattleLog.add("-->你前进了" + d + "米。");
+        this.BattleLog.add("-->你前进了" + d + "米。",color.BLACK);
         this.distance -= d;
         this.UpdateDistance();
         this.heroCD+=1;
@@ -317,7 +319,7 @@ cc.Class({
 
     JumpBackward:function () {
         var d = window.Player.speed * 5;
-        this.BattleLog.add("-->你后退了" + d + "米。");
+        this.BattleLog.add("-->你后退了" + d + "米。",color.BLACK);
         this.distance += d;
         this.UpdateDistance();
         this.heroCD += 1;
@@ -332,7 +334,7 @@ cc.Class({
             window.Player.escapeProficiency++;
         }
         else{
-            this.BattleLog.add("-->你试图逃跑，但是被阻止了！");
+            this.BattleLog.add("-->你试图逃跑，但是被阻止了！",color.BLACK);
             this.heroCD+=1;
             this.CheckTurn();
         }
@@ -363,7 +365,7 @@ cc.Class({
         this.BattleLog.add("-->你击败" + this.enemy.name + "。");
         var rwd = window.Game.getReward(this.enemy.killReward);
         window.Player.addItem(rwd,1);
-        this.BattleLog.add("-->获得了"+window.ReadJson.getItem(rwd).name+"×1。");
+        this.BattleLog.add("-->获得了"+window.ReadJson.getItem(rwd).name+"×1。",color.GREEN);
         if (this.enemyIndex < this.enemyIds.length) {
             this.getEnemy();
             this.initBattle();
@@ -375,7 +377,7 @@ cc.Class({
 
     getEnemy:function () {
         this.enemy = window.ReadJson.getNPC(this.enemyIds[this.enemyIndex]);
-        this.BattleLog.add("-->你发现了" + this.enemy.name + "。");
+        this.BattleLog.add("-->你发现了" + this.enemy.name + "。",color.RED);
         this.enemyIndex++;
     }
 

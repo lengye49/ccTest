@@ -21,12 +21,14 @@ cc.Class({
         })
     },
 
-    addLog:function (str) {
+    addLog:function (str,c) {
         var length = this.battleLogs.length;
         for (var i = 0;i < length - 1;i++)
         {
             this.battleLogs[i].string = this.battleLogs[i + 1].string;
+            this.battleLogs[i].node.color = this.battleLogs[i+1].node.color;
         }
         this.battleLogs[length - 1].string = str;
+        this.battleLogs[length-1].node.color = c;
     }
 });
