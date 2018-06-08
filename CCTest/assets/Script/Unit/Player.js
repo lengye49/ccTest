@@ -2,44 +2,6 @@
 cc.Class({
     extends: cc.Component,
 
-
-    //属性列表
-    /*
-    * 0 hp
-    * 1 hpMax
-    * 2 attack
-    * 4 defence
-    * 6 speed
-    * 7 basicSpeed
-    * 8 spirit
-    * 9 food
-    * 10 water
-    * 11 constitution
-    * 12 weight
-    * 13 weightMax
-    * 14 escapeProficiency
-    * 15 meleeProficiency
-    * 16 rangedProficiency
-    * 17 hit
-    * 18 crit
-    * 19 cd
-    *
-    * 20 confidence自信 自卑，懵懂，自信，狂妄
-    * 21 kindness仁慈 凶残 残忍 淳朴 善良 老好人
-    * 22 cleverness聪明 愚蠢 笨拙 聪明 精明
-    *
-    * 30 money
-    * 31 distance
-    *
-    * 100 dogHp
-    * 101 dogHpMax
-    * 102 dogAtk
-    * 104 dogDef
-    * 109 dogFood
-    * 110 dogWater
-    * 111 dogConstitution
-    * */
-
     properties: {
         //战斗属性：
         hp: 100,
@@ -70,7 +32,7 @@ cc.Class({
         water: 100,
 
         //体质：影响生命上限、精力上限
-        constitution: 30,
+        constitution: 10,
 
         //熟练度
         escapeProficiency: 0,
@@ -117,7 +79,7 @@ cc.Class({
         dogFood: 0,
         dogWater: 0,
         dogConstitution: 0,
-        dogType:0,//0拉巴拉多，1泰迪，2藏獒，3哈士奇
+        dogType:0,
     },
 
     onLoad:function(){
@@ -125,7 +87,7 @@ cc.Class({
 
     },
 
-    //需要提供的角色数据：hp,constitution,spirit,food,water,weapon1,weapon2,armor,shoes,confidence,kindness,cleverness
+    //需要提供的角色数据：hp,constitution,spirit,food,water,weapon1,weapon2,armor,shoes,confidence,kindness,cleverness,weight
     //需要提供的宠物数据：hasDog,dogName,
     SetPlayerData :function(str) {
         var strs = str.split(";");
@@ -155,6 +117,7 @@ cc.Class({
         this.hpMax = 50+this.constitution * 2;
         this.attack =  this.constitution;
         this.defence = 0;
+        this.weightMax = 10 + Math.floor(this.constitution/5);
         this.readWeapon1();
         this.readWeapon2();
         this.readArmor();
@@ -211,11 +174,11 @@ cc.Class({
                     this.weapon2Distance = parseFloat(ss[1]);
             }
         } else {
-            this.weapon1Atk = this.attack;
-            this.weapon1Hit = 80 * (1 + this.meleeProficiency / 100);
-            this.weapon1Crit = 10 * (1 + this.meleeProficiency / 100);
-            this.weapon1CD = 1.0 / (1 + this.meleeProficiency / 100);
-            this.weapon1Distance = 0.5;
+            this.weapon2Atk = this.attack;
+            this.weapon2Hit = 80 * (1 + this.meleeProficiency / 100);
+            this.weapon2Crit = 10 * (1 + this.meleeProficiency / 100);
+            this.weapon2CD = 1.0 / (1 + this.meleeProficiency / 100);
+            this.weapon2Distance = 0.5;
         }
     },
 

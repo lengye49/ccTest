@@ -66,7 +66,7 @@ cc.Class({
                 return "药品";
             case 4:
                 this.updateActions(true,"使用",true,"喂狗");
-                return "食材";
+                return "食物";
             case 5:
                 this.updateActions(true,"使用",false,"");
                 return "消耗品";//酒、烟等狗不可用的物品
@@ -91,7 +91,6 @@ cc.Class({
         }
     },
 
-    //更新属性,格式 类型1|值1;类型2|值2
     itemEffectsString:function (str) {
         var s = str.split(";");
         var pros = "";

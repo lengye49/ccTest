@@ -46,10 +46,6 @@ cc.Class({
                     item.type = res[i].type;
                     item.effects = res[i].effects;//武器 攻击|命中|暴击|间隔|距离，衣服：防御，鞋子：速度
                     item.ammo = res[i].ammo;//弹药id
-                    item.canTier = res[i].canTier;
-                    item.attack = res[i].attack;//注掉
-                    item.distance = res[i].distance;//注掉
-                    item.cd = res[i].cd;//注掉
                     break;
                 }
             }
@@ -132,7 +128,7 @@ cc.Class({
             case 15:
                 return "搏斗熟练度";
             case 16:
-                return "瞄准熟练度";
+                return "射击熟练度";
             case 17:
                 return "命中率";
             case 18:

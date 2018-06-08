@@ -8,7 +8,7 @@
 //  - [Chinese] http://www.cocos.com/docs/creator/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/life-cycle-callbacks/index.html
 var BattleAction = require("BattleActionState");
-var Unit = require("Unit");
+
 cc.Class({
     extends: cc.Component,
 
@@ -38,7 +38,6 @@ cc.Class({
 
     onLoad:function(){
         this.BattleLog = this.node.getChildByName("battleLog").getComponent("BattleLog");
-        this.enemy = new Unit();
     },
 
 
@@ -114,8 +113,8 @@ cc.Class({
         var stateStr = "";
 
         if (this.weapon1 != undefined) {
-            stateStr = this.weapon1.distance + "米";
-            isOn = (this.distance <= this.weapon1.distance);
+            stateStr = window.Player.weapon1Distance + "米";
+            isOn = (this.distance <= window.Player.weapon1Distance);
         } else {
             stateStr = "1米";
             isOn = (this.distance <= 1);
@@ -124,8 +123,8 @@ cc.Class({
 
         if (this.weapon2 != undefined) {
             if (window.Player.isItemEnough(this.weapon2.ammo, 1)) {
-                stateStr = this.weapon2.distance + "米";
-                isOn = (this.distance <= this.weapon1.distance);
+                stateStr = window.Player.weapon2Distance + "米";
+                isOn = (this.distance <= window.Player.weapon2Distance);
             } else {
                 stateStr = "缺少弹药";
                 isOn = false;
