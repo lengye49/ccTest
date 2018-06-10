@@ -80,6 +80,8 @@ cc.Class({
         dogWater: 0,
         dogConstitution: 0,
         dogType:0,
+        dogRetrieve:0,
+        dogAlert:0,
     },
 
     onLoad:function(){

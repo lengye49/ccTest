@@ -7,6 +7,10 @@ cc.Class({
         itemContainer:cc.Node,
         itemTipNode:cc.Node,
 
+        backpackNode:cc.Node,
+        characterNode:cc.Node,
+        isBackpackOn:true,
+
         weapon1Btn:cc.Button,
         weapon1Label:cc.Label,
 
@@ -24,11 +28,35 @@ cc.Class({
     start () {
         this.itemTip = this.itemTipNode.getComponent("ItemTip");
         this.cellPool = new Array();
+        this.character = this.characterNode.getComponent("CharacterManager");
+    },
+
+    //*************************切换界面***************************
+    switchPanel:function(){
+        if(this.isBackpackOn){
+            this.toCharacter();
+        }else{
+            this.toBackpack();
+        }
+    },
+
+    toBackpack:function(){
+        this.backpackNode.position = cc.p(0,0);
+        this.characterNode.position = cc.p(-5000,0);
+        this.isBackpackOn=true;
+    },
+
+    toCharacter:function(){
+        this.characterNode.position = cc.p(0,0);
+        this.backpackNode.position = cc.p(-5000,0);
+        this.isBackpackOn=false;
+        this.character.updateShow();
     },
 
     //*************************更新展示***************************
     //默认使用的是第一个
     updateShow:function () {
+        this.toBackpack();
         var i;
         var totalWeight = 0.0;
         var items = window.Player.backpack.getItems();
