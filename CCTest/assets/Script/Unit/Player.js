@@ -86,17 +86,16 @@ cc.Class({
 
     onLoad:function(){
         this.HeadView = this.getComponent('HeadView');
-
     },
 
-    //需要提供的角色数据：hp,constitution,spirit,food,water,weapon1,weapon2,armor,shoes,confidence,kindness,cleverness,weight
+    //需要提供的角色数据：hp,constitution,spirit,food,water,weapon1,weapon2,armor,shoes,meleePro,rangedPro,escapePro,confidence,kindness,cleverness,weight
     //需要提供的宠物数据：hasDog,dogName,
+    //需提供的储存数据：backpack,barbecueLearned,fabricateLearned,
     SetPlayerData :function(str) {
         var strs = str.split(";");
         this.day = parseInt(strs[0]);
         this.hp = parseInt(strs[1]);
         this.hpMax = parseInt(strs[2]);
-        this.basicAttack = parseInt(strs[3]);
         this.spirit = parseInt(strs[4]);
         this.money = parseInt(strs[5]);
         this.backpack = this.explainBackpack(strs[6]);
@@ -563,7 +562,7 @@ cc.Class({
 
     updateTime:function () {
         var min = this.minutesPassed;
-        var monthNow = parseInt(min/43200);
+        var monthNow = Math.floor (min/43200);
 
         var lastSeason = this.seasonNow;
         this.seasonNow = (monthNow % 12) / 3;
@@ -582,6 +581,8 @@ cc.Class({
             console.log("HourChanged!")
             var hours = (this.hourNow>lastHour)?(this.hourNow-lastHour):(this.hourNow+24-lastHour);
             this.ConsumeFoodAndWater(hours);
+            //根据体质随时间回复生命，每10体质回复1生命
+            this.heal(Math.floor(hours*this.constitution/10));
         }
 
         this.minuteNow = min % 60;
