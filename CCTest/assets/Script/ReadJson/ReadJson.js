@@ -65,7 +65,8 @@ cc.Class({
                     npc.name = res[i].name;
                     npc.desc = res[i].desc;
                     npc.hp = res[i].hp;
-                    npc.hpMax = res[i].hpMax;
+                    npc.hpMax = res[i].hp;
+                    npc.attack = res[i].attack;
                     npc.speed = res[i].speed;
                     npc.attackDistance = res[i].attackDistance;
                     npc.hit = res[i].hit;

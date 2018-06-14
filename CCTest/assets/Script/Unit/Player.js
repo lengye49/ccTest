@@ -198,7 +198,7 @@ cc.Class({
         if(this.shoes>0){
             var effects = window.ReadJson.getItem(this.shoes).effects;
             var ss= effects.split("|");
-            this.speed *= (1 + parseInt(ss[1])/100);
+            this.speed += parseFloat(ss[1]);
         }
     },
 

@@ -1564,7 +1564,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -5000,
+      "x": -2000,
       "y": -41
     },
     "_skewX": 0,
@@ -4215,7 +4215,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 175
+      "height": 270
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4224,7 +4224,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -3,
-      "y": 121
+      "y": 104
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4249,7 +4249,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "防御+5\n生命+100\n饺子+50",
+    "_N$string": "防御+5\n生命+100\n饺子+50\n脑子+10\n场子+20",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -4289,7 +4289,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 450,
-      "height": 150
+      "height": 100
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4298,7 +4298,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -50
+      "y": -90
     },
     "_skewX": 0,
     "_skewY": 0,
