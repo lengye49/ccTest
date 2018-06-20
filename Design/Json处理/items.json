@@ -1,0 +1,412 @@
+[
+  {
+    "id": 101,
+    "name": "木棒mu'bang",
+    "desc": "非常结实的棍棒，淘气的孩子知道它的威力。",
+    "price": 0,
+    "type": 0,
+    "effects": "2|10;17|0.8;18|0.15;19|1.5;31|1.5",
+    "ammo": 0,
+    "weight": 0.5
+  },
+  {
+    "id": 102,
+    "name": "匕首bi'shou",
+    "desc": "小巧的匕首，非常锋利。",
+    "price": 15,
+    "type": 0,
+    "effects": "2|20;17|0.8;18|0.05;19|1;31|1.1",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 103,
+    "name": "弯刀wan'dao",
+    "desc": "带鞘的刀，刀身布满了各种花纹。",
+    "price": 80,
+    "type": 0,
+    "effects": "2|40;17|0.8;18|0.1;19|1.2;31|1.4",
+    "ammo": 0,
+    "weight": 1.5
+  },
+  {
+    "id": 104,
+    "name": "军刺jun'ci",
+    "desc": "灰白的三棱刺刀，看起来不怎么起眼。",
+    "price": 200,
+    "type": 0,
+    "effects": "2|50;17|0.8;18|0.1;19|1.2;31|1.4",
+    "ammo": 0,
+    "weight": 1.2
+  },
+  {
+    "id": 200,
+    "name": "旧裙子jiuqun'zi",
+    "desc": "妈妈穿过裙子，不太合身。",
+    "price": 10,
+    "type": 1,
+    "effects": "4|2",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 201,
+    "name": "T恤",
+    "desc": "宽大的T恤上印着几个字母 \"Breaker\"。",
+    "price": 10,
+    "type": 1,
+    "effects": "4|3",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 202,
+    "name": "皮衣jiu'chen'shan",
+    "desc": "人造皮革做的衣服，穿上有点热。",
+    "price": 20,
+    "type": 1,
+    "effects": "4|8",
+    "ammo": 0,
+    "weight": 0.3
+  },
+  {
+    "id": 203,
+    "name": "军服jiu'dejun'fu",
+    "desc": "土黄色的军装，布料结实。",
+    "price": 50,
+    "type": 1,
+    "effects": "4|12",
+    "ammo": 0,
+    "weight": 0.3
+  },
+  {
+    "id": 204,
+    "name": "防弹马甲fang'dan'ma'jia",
+    "desc": "沉重的马甲，优点很明显。",
+    "price": 300,
+    "type": 1,
+    "effects": "4|25",
+    "ammo": 0,
+    "weight": 2
+  },
+  {
+    "id": 300,
+    "name": "凉鞋liang'xie",
+    "desc": "穿起来凉爽，但不适合赶路。",
+    "price": 4,
+    "type": 2,
+    "effects": "6|0.1",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 301,
+    "name": "布鞋",
+    "desc": "纳鞋底的人仿佛很着急。",
+    "price": 8,
+    "type": 2,
+    "effects": "6|0.15",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 302,
+    "name": "球鞋jiujun'xue",
+    "desc": "军绿色的球鞋，走在硬石滩上咯脚。",
+    "price": 30,
+    "type": 2,
+    "effects": "6|0.2",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 303,
+    "name": "运动鞋yun'dong'xie",
+    "desc": "结实的运动鞋，商标是一个大大的X。",
+    "price": 80,
+    "type": 2,
+    "effects": "6|0.3",
+    "ammo": 0,
+    "weight": 0.3
+  },
+  {
+    "id": 400,
+    "name": "绷带beng'dai",
+    "desc": "常见的医疗用品，用来包扎伤口。",
+    "price": 10,
+    "type": 3,
+    "effects": "0|20",
+    "ammo": 0,
+    "weight": 0.05
+  },
+  {
+    "id": 401,
+    "name": "抗生素kang'sheng'su",
+    "desc": "药品，具有杀菌效果。",
+    "price": 50,
+    "type": 3,
+    "effects": "0|50",
+    "ammo": 0,
+    "weight": 0.05
+  },
+  {
+    "id": 500,
+    "name": "野果shui'guo",
+    "desc": "口感酸涩的一种小果子。",
+    "price": 1,
+    "type": 4,
+    "effects": "9|4;10|1;8|1",
+    "ammo": 0,
+    "weight": 0.1
+  },
+  {
+    "id": 501,
+    "name": "鸟蛋niao'dan",
+    "desc": "灰白色的鸟蛋，有浅浅的花纹。",
+    "price": 0,
+    "type": 4,
+    "effects": "9|2;8|1",
+    "ammo": 0,
+    "weight": 0.1
+  },
+  {
+    "id": 502,
+    "name": "生肉rou",
+    "desc": "一块生肉，烤了才好吃。",
+    "price": 3,
+    "type": 4,
+    "effects": "9|12;8|-3",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 503,
+    "name": "烤肉",
+    "desc": "金黄的烤肉，散发着浓郁的香气。",
+    "price": 5,
+    "type": 4,
+    "effects": "9|12;8|2",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 504,
+    "name": "干面包mian'bao",
+    "desc": "面包放久了，就是干面包。",
+    "price": 2,
+    "type": 4,
+    "effects": "9|10;8|1",
+    "ammo": 0,
+    "weight": 0.1
+  },
+  {
+    "id": 505,
+    "name": "三明治san'ming'zhi",
+    "desc": "两片干面包夹几片肉和奶酪。",
+    "price": 4,
+    "type": 4,
+    "effects": "9|15;8|3",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 506,
+    "name": "汉堡",
+    "desc": "配料丰富，好吃，好贵。",
+    "price": 6,
+    "type": 4,
+    "effects": "9|20;8|5",
+    "ammo": 0,
+    "weight": 0.3
+  },
+  {
+    "id": 507,
+    "name": "野菜ye'cai",
+    "desc": "一把可以使用的野菜。",
+    "price": 0,
+    "type": 4,
+    "effects": "9|2",
+    "ammo": 0,
+    "weight": 0.1
+  },
+  {
+    "id": 508,
+    "name": "昆虫shi'yongkun'chong",
+    "desc": "嘎嘣脆，鸡肉味！",
+    "price": 0,
+    "type": 4,
+    "effects": "9|2;8|-1",
+    "ammo": 0,
+    "weight": 0.1
+  },
+  {
+    "id": 509,
+    "name": "矿泉水shui",
+    "desc": "一瓶水。",
+    "price": 2,
+    "type": 4,
+    "effects": "9|20",
+    "ammo": 0,
+    "weight": 0.5
+  },
+  {
+    "id": 510,
+    "name": "罐装饮料guan'zhuang'yin'liao",
+    "desc": "口感甜腻的饮料。",
+    "price": 4,
+    "type": 4,
+    "effects": "9|15;8|5",
+    "ammo": 0,
+    "weight": 0.3
+  },
+  {
+    "id": 600,
+    "name": "香烟",
+    "desc": "吸烟有害健康。",
+    "price": 10,
+    "type": 5,
+    "effects": "0|-5;8|5",
+    "ammo": 0,
+    "weight": 0.05
+  },
+  {
+    "id": 601,
+    "name": "烈酒",
+    "desc": "烈性酒水，少儿不宜。",
+    "price": 12,
+    "type": 5,
+    "effects": "0|-5;8|10",
+    "ammo": 0,
+    "weight": 0.2
+  },
+  {
+    "id": 700,
+    "name": "木弓",
+    "desc": "木制弓箭，很容易拉开。",
+    "price": 50,
+    "type": 6,
+    "effects": "2|15;17|0.4;18|0.15;19|2;31|20",
+    "ammo": 900,
+    "weight": 1
+  },
+  {
+    "id": 701,
+    "name": "猎弓",
+    "desc": "精致的猎弓，需要保养得当。",
+    "price": 150,
+    "type": 6,
+    "effects": "2|30;17|0.5;18|0.2;19|2;31|30",
+    "ammo": 900,
+    "weight": 3
+  },
+  {
+    "id": 800,
+    "name": "手枪shou'qiang",
+    "desc": "制式武器。",
+    "price": 200,
+    "type": 7,
+    "effects": "2|40;17|0.7;18|0.1;19|1;31|30",
+    "ammo": 901,
+    "weight": 1.5
+  },
+  {
+    "id": 801,
+    "name": "双管猎枪shuang'guanlie'qiang",
+    "desc": "制式武器。",
+    "price": 999,
+    "type": 7,
+    "effects": "2|120;17|0.9;18|0.05;19|2;31|10",
+    "ammo": 901,
+    "weight": 3.5
+  },
+  {
+    "id": 802,
+    "name": "UMP冲锋枪chong'feng'qiang",
+    "desc": "制式武器。",
+    "price": 2999,
+    "type": 7,
+    "effects": "2|60;17|0.8;18|0.05;19|0.4;31|10",
+    "ammo": 901,
+    "weight": 2.5
+  },
+  {
+    "id": 803,
+    "name": "AK步枪bu'qiang",
+    "desc": "制式武器。",
+    "price": 4999,
+    "type": 7,
+    "effects": "2|100;17|0.7;18|0.15;19|1.5;31|50",
+    "ammo": 901,
+    "weight": 3.5
+  },
+  {
+    "id": 900,
+    "name": "子弹zi'dan",
+    "desc": "枪械类制式武器的弹药。",
+    "price": 3,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.05
+  },
+  {
+    "id": 901,
+    "name": "木箭",
+    "desc": "弓箭类武器的弹药。",
+    "price": 1,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.05
+  },
+  {
+    "id": 902,
+    "name": "木条",
+    "desc": "一根坚韧的木条，用途较多。",
+    "price": 0,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.03
+  },
+  {
+    "id": 903,
+    "name": "瓶盖",
+    "desc": "饮料瓶盖，里面写着\"谢谢惠顾\"。",
+    "price": 0.1,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.01
+  },
+  {
+    "id": 904,
+    "name": "空瓶子",
+    "desc": "空瓶子。",
+    "price": 0.5,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.02
+  },
+  {
+    "id": 905,
+    "name": "破旧衣物",
+    "desc": "破旧的布料，不能穿了。",
+    "price": 0.2,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.02
+  },
+  {
+    "id": 906,
+    "name": "铁片",
+    "desc": "一块铁片，边缘很锋利。",
+    "price": 0,
+    "type": 8,
+    "effects": 0,
+    "ammo": 0,
+    "weight": 0.02
+  }
+]

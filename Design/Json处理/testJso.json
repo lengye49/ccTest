@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "naozi",
+    "desc": "haochi",
+    "price": 100,
+    "p1type": 1,
+    "p1value": 2,
+    "p2type": 2,
+    "p2value": 3,
+    "p3type": 0,
+    "p3value": 0
+  },
+  {
+    "id": 2,
+    "name": "xiaonaozi",
+    "desc": "buahochi",
+    "price": 100,
+    "p1type": 1,
+    "p1value": 2,
+    "p2type": 2,
+    "p2value": 3,
+    "p3type": 0,
+    "p3value": 0
+  }
+]
