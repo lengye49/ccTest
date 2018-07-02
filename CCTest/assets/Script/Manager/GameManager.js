@@ -98,6 +98,7 @@ cc.Class({
     },
 
     moveOut:function (target) {
+        var _scale = cc.scaleTo(0.5,0.01,0.01);
         target.position = new cc.p(-5000,0);
     },
 
@@ -105,35 +106,37 @@ cc.Class({
         target.position = new cc.p(0,0);
     },
 
-    getReward:function (str) {
-        var s = str.split(",");
-        var items = new Array();
-        var weight = new Array();
-        var i;
-        for(i=0;i<s.length;i++){
-            var ss = s.split("|");
-            items[i] = parseInt(ss[0]);
-            weight[i] = parseInt(ss[1]);
-        }
-        i = this.getRewardIndex(weight);
-        return items[i];
-    },
 
-    getRewardIndex:function(weights){
-        var total = 0;
-        var i;
-        for(i=0;i<weights.length;i++)
-            total+= weights[i];
-        var r = Math.random()*total;
-        total=0;
-        for(i=0;i<weights.length;i++)
-        {
-            total+=weights[i];
-            if(total>=r)
-                return i;
-        }
-        return 0;
-    },
+
+    // getReward:function (str) {
+    //     var s = str.split(",");
+    //     var items = new Array();
+    //     var weight = new Array();
+    //     var i;
+    //     for(i=0;i<s.length;i++){
+    //         var ss = s.split("|");
+    //         items[i] = parseInt(ss[0]);
+    //         weight[i] = parseInt(ss[1]);
+    //     }
+    //     i = this.getRewardIndex(weight);
+    //     return items[i];
+    // },
+    //
+    // getRewardIndex:function(weights){
+    //     var total = 0;
+    //     var i;
+    //     for(i=0;i<weights.length;i++)
+    //         total+= weights[i];
+    //     var r = Math.random()*total;
+    //     total=0;
+    //     for(i=0;i<weights.length;i++)
+    //     {
+    //         total+=weights[i];
+    //         if(total>=r)
+    //             return i;
+    //     }
+    //     return 0;
+    // },
 
 
 

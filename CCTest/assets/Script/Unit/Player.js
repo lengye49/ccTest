@@ -39,6 +39,10 @@ cc.Class({
         meleeProficiency: 0,
         rangedProficiency: 0,
 
+        //技能
+        fabricateLearnt:false,
+        barbecueLearnt:false,
+
         //负重，超重会影响速度
         weight: 0,
         weightMax: 100,
@@ -461,6 +465,13 @@ cc.Class({
         this.HeadView.UpdateView();
     },
 
+    CostSpirit:function(value){
+        this.spirit -= value;
+        if(this.spirit<=0){
+            console.log("死于精神崩溃！");
+        }
+    },
+
     RecoverSpirit:function (value) {
         var v = (100-this.spirit>value)?value:(100-this.spirit);
         this.spirit += v;
@@ -592,6 +603,10 @@ cc.Class({
 
 
 //*************************************判断资源数量************************************
+
+    // isGBH:function() {
+    //     return this.hp < (this.hpMax * 10 / 100);
+    // },
 
     isOverWeight:function () {
         return this.weight > this.weightMax;

@@ -33,6 +33,8 @@ cc.Class({
         dogCD:0.0,
         dogState:"准备",
 
+        enemyNoticed:false,
+
         bottomUi:cc.Node,
     },
 
@@ -52,6 +54,7 @@ cc.Class({
         this.enemyIds = enemyIds;
         this.enemyIndex = 0;
         this.getEnemy();
+        this.enemyNoticed = false;
 
         this.initBattle();
     },
@@ -187,8 +190,10 @@ cc.Class({
         } else {
             if (this.heroCD <= this.enemyCD)
                 this.PlayerTurn();
-            else
+            else{
                 this.EnemyTurn();
+                this.enemyNoticed = true;
+            }
         }
     },
 
@@ -221,6 +226,23 @@ cc.Class({
             var dmg = this.CalDamage(this.enemy.attack,window.Player.defence,this.CalCrit(this.enemy.crit));
             window.Player.damage(dmg);
             this.BattleLog.add("-->"+"你受到了"+dmg+"点伤害。",color.RED);
+            if(window.Player.hp<=0){
+                var rnd = Math.floor(Math.random() * 100);
+                if(rnd<this.enemy.cruel){
+                    console.log("Player is killed.");
+                }else{
+                    console.log("Player is wounded!");
+                    var money = Math.floor(Math.random() * window.Player.money * 0.3);
+                    if(money<=0){
+                        this.BattleLog.add("-->你被打成重伤，对方鄙视了你一番，扬长而去。",color.RED);
+                    }else{
+                        window.Player.costMoney(money);
+                        this.BattleLog.add("-->你被打成重伤，还被抢走了"+money+"元钱，真是太背了！",color.RED);
+                    }
+                    window.Player.CostSpirit(5);
+                    this.showLeave();
+                }
+            }
         }
     },
 
@@ -328,6 +350,11 @@ cc.Class({
     EscapeBattle:function () {
         var rnd = Math.floor(Math.random() * 10000);
         var rate = window.Player.speed/(window.Player.speed+this.enemy.speed)*10000;
+
+        //如果没被敌人发现，就增加逃跑几率
+        if(!this.enemyNoticed)
+            rate += 5000 + rate/2;
+
         if(rnd<=rate){
             this.showLeave();
             window.Player.escapeProficiency++;
@@ -362,14 +389,14 @@ cc.Class({
         if (this.enemy.hp > 0)
             return;
         this.BattleLog.add("-->你击败" + this.enemy.name + "。");
-        var rwd = window.Game.getReward(this.enemy.killReward);
-        window.Player.addItem(rwd,1);
-        this.BattleLog.add("-->获得了"+window.ReadJson.getItem(rwd).name+"×1。",color.GREEN);
+        var rwd = this.getReward(this.enemy.killReward);
+        this.BattleLog.add("-->获得了"+rwd,color.GREEN);
         if (this.enemyIndex < this.enemyIds.length) {
             this.getEnemy();
             this.initBattle();
         }
         else {
+            window.Player.RecoverSpirit(3);
             this.showLeave();
         }
     },
@@ -378,7 +405,21 @@ cc.Class({
         this.enemy = window.ReadJson.getNPC(this.enemyIds[this.enemyIndex]);
         this.BattleLog.add("-->你发现了" + this.enemy.name + "。",color.RED);
         this.enemyIndex++;
-    }
+    },
+
+    getReward:function(str){
+        var s = str.split(',');
+        var rwdStr = "你获得了";
+        for(let i=0;i<s.length;i++){
+            var ss = s[i].split('|');
+            var itemId = parseInt(ss[0]);
+            var num = parseInt(ss[1]);
+            window.Player.addItem(itemId,num);
+            rwdStr += " " + window.ReadJson.getItem(itemId).name + "×" + num;
+        }
+        rwdStr += "。";
+        return rwdStr;
+    },
 
 
 });

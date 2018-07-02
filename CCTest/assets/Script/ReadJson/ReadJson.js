@@ -73,7 +73,8 @@ cc.Class({
                     npc.crit = res[i].crit;
                     npc.cd = res[i].cd;
                     npc.actionName = res[i].actionName;
-                    npc.killReward = rea[i].killReward;
+                    npc.killReward = res[i].killReward;
+                    npc.cruel = res[i].cruel;
                     break;
                 }
             }

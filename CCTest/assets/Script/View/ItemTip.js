@@ -97,7 +97,10 @@ cc.Class({
         for (let i = 0; i < s.length; i++) {
             var ss = s.split("|");
             pros += window.ReadJson.getPropName(parseInt(ss[0]));
-            pros += " +"+ss[1];
+            if (parseInt(ss[1]) > 0)
+                pros += " +" + ss[1];
+            else
+                pros += " " + ss[1];
             if (i === (s.length - 1))
                 pros += "\n";
         }
